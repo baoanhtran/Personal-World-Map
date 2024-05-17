@@ -1,0 +1,121 @@
+# Import necessary packages
+import os
+import folium
+from folium import plugins
+import rioxarray as rxr
+import earthpy as et
+import earthpy.spatial as es
+import tkinter as tk
+import csv
+import math
+
+class Mainmap(tk.Tk):
+
+    def __init__(self):
+        super().__init__()
+        self.title("World Travel Map")
+        self.fichier = 'world_cities.csv'
+        self.geometry("400x200")
+
+        '''# Import data from EarthPy
+        data = et.data.get_data('colorado-flood')
+
+        # Set working directory to earth-analytics
+        os.chdir(os.path.join(et.io.HOME, 'earth-analytics', 'data'))
+        # Create a map using the Map() function and the coordinates for Boulder, CO
+        m = folium.Map(location=[48.8667, 2.3333]) #longitude and latitude
+        # Display the map
+        m.show_in_browser()'''
+
+        self.label_1 = tk.Label(self, text="The Place you are travelling to:", font='Helvetica 10 bold')
+        self.label_1.place(relx=.5, rely=.4, anchor=tk.N)
+        self.entry_1 = tk.Entry(self,)
+        self.entry_1.place(relx= .5, rely= .5, anchor= tk.N)
+
+        self.label_2 = tk.Label(self, text="The Place you are coming from :", font='Helvetica 10 bold')
+        self.label_2.place(relx=.5, rely=.6, anchor=tk.S)
+        self.entry_2 = tk.Entry(self)
+        self.entry_2.place(relx=.5, rely=.7, anchor= tk.S)
+
+
+        # Button to calculate distance
+        calculate_button = tk.Button(self, text="Calculate Distance", command=self.cal_distance)
+        calculate_button.place(relx=.5, rely=.8, anchor=tk.CENTER)
+
+
+        #RadioButton for carbon footprint
+        self.choix = tk.StringVar()  # Variable commune aux 3 RadioButtons
+        self.choix.set("Method of Transportation")
+        self.radio1 = tk.Radiobutton(self, text="Air plane", variable=self.choix, value="Air plane")
+        self.radio1.place(relx=.7, rely=.4,anchor=tk.W)
+        self.radio2 = tk.Radiobutton(self, text="Ferry", variable=self.choix, value="Ferry")
+        self.radio2.place(relx=.7, rely=.5,anchor=tk.W)
+        self.radio3 = tk.Radiobutton(self, text="Bus", variable=self.choix, value="Bus")
+        self.radio3.place(relx=.7, rely=.6, anchor=tk.W)
+        self.radio4 = tk.Radiobutton(self, text="Train", variable=self.choix, value="Train")
+        self.radio4.place(relx=.7, rely=.7, anchor=tk.W)
+        self.radio5 = tk.Radiobutton(self, text= "Bike", variable=self.choix, value= "Bike")
+        self.radio5.place(relx=.7, rely=.8, anchor=tk.W)
+        self.radio6 = tk.Radiobutton(self, text="Foot", variable=self.choix, value="Foot")
+        self.radio6.place(relx=.7, rely=.9, anchor=tk.W)
+
+        # Button to carbon footprint
+        calculate_button = tk.Button(self, text="Calculate carbon footprint", command=self.carbon_footprint)
+        calculate_button.place(relx=.5, rely=.9, anchor=tk.CENTER)
+
+    def cal_distance(self):
+        city1_str = self.entry_1.get()
+        city2_str =  self.entry_2.get()
+        self.use_lng_lag()
+        data = self.data_lng_lag
+        coordinate_1 = data[city1_str]
+        coordinate_2 = data[city2_str]
+
+        lat1 = math.radians(coordinate_1[0]) ; lon1 = math.radians(coordinate_1[1]) ; lat2 = math.radians(coordinate_2[0]) ; lon2 = math.radians(coordinate_2[1])
+        # You need Latitude and Longitude to calculate the distance between two locations with following formula: =acos(sin(lat1)*sin(lat2)+cos(lat1)*cos(lat2)*cos(lon2-lon1))*6371 (6371 is Earth radius in km.)
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+        a = (math.sin(dlat / 2)) ** 2 + math.cos(lat1) * math.cos(lat2) * (math.sin(dlon / 2)) ** 2
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+        R = 6373
+        distance = R * c
+        self.distance = distance
+        print(f"The distance between {city1_str} and {city2_str} is {self.distance}")
+
+    def use_lng_lag(self):
+        """
+        Fill the graph with data from the CSV file.
+        """
+        with open(self.fichier,"r") as csvfile:
+            reader = csv.reader(csvfile, delimiter=",")
+            dicotemp = {}
+            for ligne in reader:
+                city, city_ascii, latitude, longitude, country = ligne
+                if city not in dicotemp:  # si la clef n'existe pas encore
+                    dicotemp[city_ascii] = (
+                    float(latitude), float(longitude))  # on cree la liste des infos associées
+        self.data_lng_lag = dicotemp
+
+
+    def carbon_footprint(self):
+        result = None
+        if self.choix.get() == "Air plane":
+            result = self.distance * 246 # in grams
+        elif self.choix.get() == "Ferry":
+            result = self.distance * 19
+        elif self.choix.get() == "Bus":
+            result = self.distance * 97
+        elif self.choix.get() ==  "Train":
+            result = self.distance * 35
+        elif self.choix.get() in ["Bike", "Foot"]:
+            result = 0  # No carbon footprint
+        else:
+            print("Invalid choice")
+
+        if result is not None:
+            print("Carbon footprint:", result, "grams")
+
+
+if __name__ == "__main__":
+    app = Mainmap()
+    app.mainloop()
