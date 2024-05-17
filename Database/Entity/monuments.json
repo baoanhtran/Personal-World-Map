@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "country_id": 1,
+        "name": "Eiffel Tower",
+        "description": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France. It is named after the engineer Gustave Eiffel, whose company designed and built the tower."
+    },
+    {
+        "id": 2,
+        "country_id": 1,
+        "name": "Statue of Liberty",
+        "description": "The Statue of Liberty is a colossal neoclassical sculpture on Liberty Island in New York Harbor in New York City, in the United States."
+    }
+]

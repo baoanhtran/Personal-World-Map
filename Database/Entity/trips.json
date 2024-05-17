@@ -1,0 +1,17 @@
+[
+    {
+        "user_id": 1,
+        "country_id": 1,
+        "date": "07/05/2024"
+    },
+    {
+        "user_id": 1,
+        "country_id": 3,
+        "date": "08/05/2024"
+    },
+    {
+        "user_id": 2,
+        "country_id": 5,
+        "date": "01/05/2024"
+    }
+]
