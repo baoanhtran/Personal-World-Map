@@ -1,0 +1,61 @@
+'Upcoming travels'
+
+from datetime import date
+
+
+class travels () :
+    
+    __sloth__ = ['']
+    
+    def __init__(self):
+        
+        self.upcomming_trips = {}
+        self.passed_trips = {}
+        self.reminder()
+        self.archiver()
+    
+    def prochain_voyage ( self,event):
+        '''le prochain bouton sert à receuillir le lieu, la date de début et de fin du prochain voyage de l'utilisateur'''
+        place = self.trip_place.get()
+        start = self.trip_start.get()
+        end = self.trip_end.get()
+        
+        self.upcomming_trips[place] = [start,end]
+        
+    def annuler_voyage (self,event) :
+        ''' cette fonction sert à annuler un voyage existant'''
+        
+        place = self.trip_place.get()
+        start = self.trip_start.get()
+        end = self.trip_end.get()
+        upcomming_trips = self.upcomming_trips
+        for trip in upcomming_trips:
+            if trip == place and [start,end] == upcomming_trips[trip]:
+                upcomming_trips.pop(trip)
+                
+    def reminder(self):
+        # On récupère la date et on la split en year,month,day pour la comparer à la date sur le calendrier
+        today = date.today()
+        year, month, day = str(today).split('-')
+        upcomming_trips =self.upcomming_trips
+        
+        
+        for trip_place in upcomming_trips:
+            # on fait la même manipulation que plus tot mais pour la date du voyage à venir, day_n stands for day_next, that is to say the day of the trip compared
+            year_n, month_n, day_n = upcomming_trips[trip_place][0].split('-')
+            if year_n == year and month_n == month and abs(day_n - day) < 4 :
+                
+                return f'You are soon going on a trip! You are going to {trip_place} from {upcomming_trips[trip_place][0]} to {upcomming_trips[trip_place][1]}'
+                
+    def archiver(self):
+        " cette fonction à pour but d'enlever les voyages déja passés de  upcomming_trips et les storer dans passed_trips "
+        
+        
+        
+        
+''' moyen de split la date de today date
+today = date.today()
+y, m, d = str(today).split('-')
+
+print(today)
+print(y)'''
