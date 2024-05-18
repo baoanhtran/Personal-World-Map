@@ -7,7 +7,8 @@ def country_to_list():
         for i, ele in enumerate(data):
             dico = {
                 "id": i+1,
-                "name": ele["cntry_name"]
+                "name": ele["cntry_name"],
+                "description": ""
             }
             countries.append(dico)
 

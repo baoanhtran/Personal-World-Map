@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from Model.Map import Map
 from CustomWidget.ZoomableCanvas import ZoomableCanvas
-from Controller.MapController import get_country_name, get_incoming_trips, get_all_countries_visited
+from Controller.MapController import get_country_name, get_incoming_trips, get_all_countries_visited, get_description
 from datetime import datetime
 
 class MapWindow(tk.Tk):
@@ -78,7 +78,7 @@ class MapWindow(tk.Tk):
 
 
     def show_country(self, country):
-        print(country)
+        messagebox.showinfo(country, get_description(country))
 
     def show_reminders(self):
         reminders = get_incoming_trips(self.user.id)

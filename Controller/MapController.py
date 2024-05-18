@@ -1,9 +1,12 @@
 from Repository.TripRepository import get_all_trips_by_user_id
-from Repository.CountryRepository import get_country_name_by_id
+from Repository.CountryRepository import get_country_name_by_id, get_description_by_name
 from datetime import datetime
 
 def get_country_name(country_id):
     return get_country_name_by_id(country_id)
+
+def get_description(country_name):
+    return get_description_by_name(country_name)
 
 def get_incoming_trips(user_id):
     reminders = []
@@ -18,7 +21,7 @@ def get_all_countries_visited(user_id):
     countries = []
     for trip in get_all_trips_by_user_id(user_id):
         today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        if trip.date <= today:
+        if trip.date < today:
             departure = get_country_name(trip.departure_id)
             destination = get_country_name(trip.destination_id)
             if departure not in countries:
