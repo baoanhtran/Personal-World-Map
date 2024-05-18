@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from Model.Map import Map
 from CustomWidget.ZoomableCanvas import ZoomableCanvas
-from Controller.MapController import get_country_name, get_incoming_trips
+from Controller.MapController import get_country_name, get_incoming_trips, get_all_countries_visited
 from datetime import datetime
 
 class MapWindow(tk.Tk):
@@ -18,12 +18,6 @@ class MapWindow(tk.Tk):
         quit_button = tk.Button(self, text="Quit", background="cyan", foreground="black", font=("Courier", 10))
         quit_button.bind("<Button-1>", self.quit)
         quit_button.pack(side="top", fill="x")
-
-        # Toggle side bar visibility
-        # self.side_bar_visible = True
-        # self.toggle_button = tk.Button(self, text="Hide action menu", background="cyan", foreground="black", font=("Courier", 10))
-        # self.toggle_button.bind("<Button-1>", self.toggle_side_bar)
-        # self.toggle_button.pack(side="top", fill="x")
 
         # Side bar containing 3 buttons
         self.side_bar = tk.Frame(self, bg="cyan")
@@ -43,6 +37,7 @@ class MapWindow(tk.Tk):
 
         # Button to sign out
         self.button4 = tk.Button(self.side_bar, text="Sign out", foreground="black", font=("Courier", 10), height=2)
+        self.button4.bind("<Button-1>", lambda event: self.sign_out())
         self.button4.pack(side="top", fill="x", pady=10, padx=10)
 
         # Map
@@ -54,41 +49,32 @@ class MapWindow(tk.Tk):
         # Reminders
         self.show_reminders()
 
-    #     self.mainloop()
-
-    # def toggle_side_bar(self, event):
-    #     if self.side_bar_visible:
-    #         # change the button text
-    #         self.toggle_button.config(text="Show action menu")
-
-    #         self.side_bar.pack_forget() # Hide the side bar
-    #         self.side_bar_visible = False
-    #     else:
-    #         # change the button text
-    #         self.toggle_button.config(text="Hide action menu")
-            
-    #         self.side_bar.pack(side="right", fill="y")
-    #         self.side_bar_visible = True
-
-            # Make the side bar on top of the canvas
-            # self.canevas.pack_forget()
-            # self.canevas.pack(side="left", fill="both")
+        self.mainloop()
 
     def quit(self, event):
         self.destroy()
 
     def draw(self):
+        visited_countries = get_all_countries_visited(self.user.id)
         self.canevas.delete("all")
         for (k, v) in self.map.coordinates_dict.items():
             if self.map.list_depth(v) == 4:
                 for ele in v:
                     for ele2 in ele:
-                        poly = self.canevas.create_polygon(ele2, fill="white", outline="black")
-                        self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
+                        if k in visited_countries:
+                            poly = self.canevas.create_polygon(ele2, fill="green", outline="black")
+                            self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
+                        else:
+                            poly = self.canevas.create_polygon(ele2, fill="white", outline="black")
+                            self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
             elif self.map.list_depth(v) == 3:
                 for ele in v:
-                    poly = self.canevas.create_polygon(ele, fill="white", outline="black")
-                    self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
+                    if k in visited_countries:
+                        poly = self.canevas.create_polygon(ele, fill="green", outline="black")
+                        self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
+                    else:
+                        poly = self.canevas.create_polygon(ele, fill="white", outline="black")
+                        self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
 
 
     def show_country(self, country):
@@ -108,3 +94,11 @@ class MapWindow(tk.Tk):
                 else:
                     message += f"You have a trip from {departure} to {destination} on {date}.\n"
             messagebox.showinfo("Reminders", message)
+
+    def sign_out(self):
+        if not messagebox.askokcancel("Sign out", "Are you sure you want to sign out ?"):
+            return
+
+        self.destroy()
+        from View.SigninWindow import LoginWindow
+        LoginWindow()

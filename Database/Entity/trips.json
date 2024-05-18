@@ -9,13 +9,13 @@
         "user_id": 1,
         "departure_id": 2,
         "destination_id": 1,
-        "date": "22/05/2024"
+        "date": "18/05/2024"
     },
     {
         "user_id": 1,
         "departure_id": 5,
         "destination_id": 7,
-        "date": "20/05/2024"
+        "date": "18/05/2024"
     },
     {
         "user_id": 2,
