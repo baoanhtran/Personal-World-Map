@@ -99,11 +99,12 @@ class MapWindow(tk.Tk):
         if len(reminders) > 0:
             message = f"Hi {self.user.username} !\n"
             for reminder in reminders:
-                country_name = get_country_name(reminder.country_id)
+                departure = get_country_name(reminder.departure_id)
+                destination = get_country_name(reminder.destination_id)
                 date = datetime.strftime(reminder.date, "%d/%m/%Y")
                 today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
                 if (reminder.date - today).days == 0:
-                    message += f"You have a trip to {country_name} today.\n"
+                    message += f"You have a trip from {departure} to {destination} today.\n"
                 else:
-                    message += f"You have an incoming trip to {country_name} on {date}.\n"
+                    message += f"You have a trip from {departure} to {destination} on {date}.\n"
             messagebox.showinfo("Reminders", message)
