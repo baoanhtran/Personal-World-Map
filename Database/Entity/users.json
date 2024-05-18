@@ -16,5 +16,18 @@
         "username": "Jim Doe",
         "password": "ghi",
         "carbon_footprint": "30"
+    },
+    {
+        "id": 4,
+        "username": "sdfsdf",
+        "password": "sdfsd",
+        "trips": [],
+        "carbon_footprint": 0
+    },
+    {
+        "id": 5,
+        "username": "Bao Anh",
+        "password": "abc",
+        "carbon_footprint": 0
     }
 ]

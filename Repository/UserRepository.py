@@ -28,7 +28,6 @@ def add_user(username, password):
             "id": user_id,
             "username": username,
             "password": password,
-            "trips": [],
             "carbon_footprint": 0
         }
         users.append(new_user)
@@ -36,6 +35,6 @@ def add_user(username, password):
     with open("Database/Entity/users.json", "w") as file:
         json.dump(users, file, indent=4)
     
-    user_obj = User(user_id, username, password, [], 0)
+    user_obj = User(user_id, username, password, 0)
     
     return user_obj

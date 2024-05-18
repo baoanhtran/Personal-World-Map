@@ -1,1262 +1,1010 @@
 [
     {
         "id": 1,
-        "name": "American Samoa",
-        "list_of_monuments": []
+        "name": "American Samoa"
     },
     {
         "id": 2,
-        "name": "Bhutan",
-        "list_of_monuments": []
+        "name": "Bhutan"
     },
     {
         "id": 3,
-        "name": "Congo",
-        "list_of_monuments": []
+        "name": "Congo"
     },
     {
         "id": 4,
-        "name": "Colombia",
-        "list_of_monuments": []
+        "name": "Colombia"
     },
     {
         "id": 5,
-        "name": "Central African Republic",
-        "list_of_monuments": []
+        "name": "Central African Republic"
     },
     {
         "id": 6,
-        "name": "French Polynesia",
-        "list_of_monuments": []
+        "name": "French Polynesia"
     },
     {
         "id": 7,
-        "name": "Honduras",
-        "list_of_monuments": []
+        "name": "Honduras"
     },
     {
         "id": 8,
-        "name": "Indonesia",
-        "list_of_monuments": []
+        "name": "Indonesia"
     },
     {
         "id": 9,
-        "name": "Iran",
-        "list_of_monuments": []
+        "name": "Iran"
     },
     {
         "id": 10,
-        "name": "Kenya",
-        "list_of_monuments": []
+        "name": "Kenya"
     },
     {
         "id": 11,
-        "name": "Mozambique",
-        "list_of_monuments": []
+        "name": "Mozambique"
     },
     {
         "id": 12,
-        "name": "Nigeria",
-        "list_of_monuments": []
+        "name": "Nigeria"
     },
     {
         "id": 13,
-        "name": "Papua New Guinea",
-        "list_of_monuments": []
+        "name": "Papua New Guinea"
     },
     {
         "id": 14,
-        "name": "St. Helena",
-        "list_of_monuments": []
+        "name": "St. Helena"
     },
     {
         "id": 15,
-        "name": "Tajikistan",
-        "list_of_monuments": []
+        "name": "Tajikistan"
     },
     {
         "id": 16,
-        "name": "Taiwan",
-        "list_of_monuments": []
+        "name": "Taiwan"
     },
     {
         "id": 17,
-        "name": "Bosnia and Herzegovina",
-        "list_of_monuments": []
+        "name": "Bosnia and Herzegovina"
     },
     {
         "id": 18,
-        "name": "Dominican Republic",
-        "list_of_monuments": []
+        "name": "Dominican Republic"
     },
     {
         "id": 19,
-        "name": "Pakistan",
-        "list_of_monuments": []
+        "name": "Pakistan"
     },
     {
         "id": 20,
-        "name": "Sao Tome and Principe",
-        "list_of_monuments": []
+        "name": "Sao Tome and Principe"
     },
     {
         "id": 21,
-        "name": "Turkmenistan",
-        "list_of_monuments": []
+        "name": "Turkmenistan"
     },
     {
         "id": 22,
-        "name": "Tanzania, United Republic of",
-        "list_of_monuments": []
+        "name": "Tanzania, United Republic of"
     },
     {
         "id": 23,
-        "name": "Uganda",
-        "list_of_monuments": []
+        "name": "Uganda"
     },
     {
         "id": 24,
-        "name": "Albania",
-        "list_of_monuments": []
+        "name": "Albania"
     },
     {
         "id": 25,
-        "name": "Austria",
-        "list_of_monuments": []
+        "name": "Austria"
     },
     {
         "id": 26,
-        "name": "Belgium",
-        "list_of_monuments": []
+        "name": "Belgium"
     },
     {
         "id": 27,
-        "name": "Cyprus",
-        "list_of_monuments": []
+        "name": "Cyprus"
     },
     {
         "id": 28,
-        "name": "Jarvis Island",
-        "list_of_monuments": []
+        "name": "Jarvis Island"
     },
     {
         "id": 29,
-        "name": "Faroe Islands",
-        "list_of_monuments": []
+        "name": "Faroe Islands"
     },
     {
         "id": 30,
-        "name": "Guyana",
-        "list_of_monuments": []
+        "name": "Guyana"
     },
     {
         "id": 31,
-        "name": "Jan Mayen",
-        "list_of_monuments": []
+        "name": "Jan Mayen"
     },
     {
         "id": 32,
-        "name": "Luxembourg",
-        "list_of_monuments": []
+        "name": "Luxembourg"
     },
     {
         "id": 33,
-        "name": "Niue",
-        "list_of_monuments": []
+        "name": "Niue"
     },
     {
         "id": 34,
-        "name": "Paracel Islands",
-        "list_of_monuments": []
+        "name": "Paracel Islands"
     },
     {
         "id": 35,
-        "name": "Romania",
-        "list_of_monuments": []
+        "name": "Romania"
     },
     {
         "id": 36,
-        "name": "West Bank",
-        "list_of_monuments": []
+        "name": "West Bank"
     },
     {
         "id": 37,
-        "name": "Aruba",
-        "list_of_monuments": []
+        "name": "Aruba"
     },
     {
         "id": 38,
-        "name": "Bahrain",
-        "list_of_monuments": []
+        "name": "Bahrain"
     },
     {
         "id": 39,
-        "name": "Zaire",
-        "list_of_monuments": []
+        "name": "Zaire"
     },
     {
         "id": 40,
-        "name": "Guam",
-        "list_of_monuments": []
+        "name": "Guam"
     },
     {
         "id": 41,
-        "name": "India",
-        "list_of_monuments": []
+        "name": "India"
     },
     {
         "id": 42,
-        "name": "Lesotho",
-        "list_of_monuments": []
+        "name": "Lesotho"
     },
     {
         "id": 43,
-        "name": "Morocco",
-        "list_of_monuments": []
+        "name": "Morocco"
     },
     {
         "id": 44,
-        "name": "Senegal",
-        "list_of_monuments": []
+        "name": "Senegal"
     },
     {
         "id": 45,
-        "name": "South Georgia and the South Sandwich Is",
-        "list_of_monuments": []
+        "name": "South Georgia and the South Sandwich Is"
     },
     {
         "id": 46,
-        "name": "Eritrea",
-        "list_of_monuments": []
+        "name": "Eritrea"
     },
     {
         "id": 47,
-        "name": "Israel",
-        "list_of_monuments": []
+        "name": "Israel"
     },
     {
         "id": 48,
-        "name": "Ivory Coast",
-        "list_of_monuments": []
+        "name": "Ivory Coast"
     },
     {
         "id": 49,
-        "name": "Lebanon",
-        "list_of_monuments": []
+        "name": "Lebanon"
     },
     {
         "id": 50,
-        "name": "Latvia",
-        "list_of_monuments": []
+        "name": "Latvia"
     },
     {
         "id": 51,
-        "name": "Australia",
-        "list_of_monuments": []
+        "name": "Australia"
     },
     {
         "id": 52,
-        "name": "Bangladesh",
-        "list_of_monuments": []
+        "name": "Bangladesh"
     },
     {
         "id": 53,
-        "name": "Belize",
-        "list_of_monuments": []
+        "name": "Belize"
     },
     {
         "id": 54,
-        "name": "Federated States of Micronesia",
-        "list_of_monuments": []
+        "name": "Federated States of Micronesia"
     },
     {
         "id": 55,
-        "name": "Man, Isle of",
-        "list_of_monuments": []
+        "name": "Man, Isle of"
     },
     {
         "id": 56,
-        "name": "Italy",
-        "list_of_monuments": []
+        "name": "Italy"
     },
     {
         "id": 57,
-        "name": "Norway",
-        "list_of_monuments": []
+        "name": "Norway"
     },
     {
         "id": 58,
-        "name": "Syria",
-        "list_of_monuments": []
+        "name": "Syria"
     },
     {
         "id": 59,
-        "name": "Argentina",
-        "list_of_monuments": []
+        "name": "Argentina"
     },
     {
         "id": 60,
-        "name": "Iraq",
-        "list_of_monuments": []
+        "name": "Iraq"
     },
     {
         "id": 61,
-        "name": "Suriname",
-        "list_of_monuments": []
+        "name": "Suriname"
     },
     {
         "id": 62,
-        "name": "Portugal",
-        "list_of_monuments": []
+        "name": "Portugal"
     },
     {
         "id": 63,
-        "name": "Spain",
-        "list_of_monuments": []
+        "name": "Spain"
     },
     {
         "id": 64,
-        "name": "Sweden",
-        "list_of_monuments": []
+        "name": "Sweden"
     },
     {
         "id": 65,
-        "name": "Tokelau",
-        "list_of_monuments": []
+        "name": "Tokelau"
     },
     {
         "id": 66,
-        "name": "Angola",
-        "list_of_monuments": []
+        "name": "Angola"
     },
     {
         "id": 67,
-        "name": "Barbados",
-        "list_of_monuments": []
+        "name": "Barbados"
     },
     {
         "id": 68,
-        "name": "Cuba",
-        "list_of_monuments": []
+        "name": "Cuba"
     },
     {
         "id": 69,
-        "name": "Ecuador",
-        "list_of_monuments": []
+        "name": "Ecuador"
     },
     {
         "id": 70,
-        "name": "French Guiana",
-        "list_of_monuments": []
+        "name": "French Guiana"
     },
     {
         "id": 71,
-        "name": "Gambia, The",
-        "list_of_monuments": []
+        "name": "Gambia, The"
     },
     {
         "id": 72,
-        "name": "Nepal",
-        "list_of_monuments": []
+        "name": "Nepal"
     },
     {
         "id": 73,
-        "name": "Algeria",
-        "list_of_monuments": []
+        "name": "Algeria"
     },
     {
         "id": 74,
-        "name": "Armenia",
-        "list_of_monuments": []
+        "name": "Armenia"
     },
     {
         "id": 75,
-        "name": "Howland Island",
-        "list_of_monuments": []
+        "name": "Howland Island"
     },
     {
         "id": 76,
-        "name": "Macedonia",
-        "list_of_monuments": []
+        "name": "Macedonia"
     },
     {
         "id": 77,
-        "name": "New Caledonia",
-        "list_of_monuments": []
+        "name": "New Caledonia"
     },
     {
         "id": 78,
-        "name": "Turks and Caicos Islands",
-        "list_of_monuments": []
+        "name": "Turks and Caicos Islands"
     },
     {
         "id": 79,
-        "name": "St. Vincent and the Grenadines",
-        "list_of_monuments": []
+        "name": "St. Vincent and the Grenadines"
     },
     {
         "id": 80,
-        "name": "Venezuela",
-        "list_of_monuments": []
+        "name": "Venezuela"
     },
     {
         "id": 81,
-        "name": "Bahamas, The",
-        "list_of_monuments": []
+        "name": "Bahamas, The"
     },
     {
         "id": 82,
-        "name": "Ghana",
-        "list_of_monuments": []
+        "name": "Ghana"
     },
     {
         "id": 83,
-        "name": "Japan",
-        "list_of_monuments": []
+        "name": "Japan"
     },
     {
         "id": 84,
-        "name": "Kiribati",
-        "list_of_monuments": []
+        "name": "Kiribati"
     },
     {
         "id": 85,
-        "name": "Kazakhstan",
-        "list_of_monuments": []
+        "name": "Kazakhstan"
     },
     {
         "id": 86,
-        "name": "Nauru",
-        "list_of_monuments": []
+        "name": "Nauru"
     },
     {
         "id": 87,
-        "name": "Netherlands Antilles",
-        "list_of_monuments": []
+        "name": "Netherlands Antilles"
     },
     {
         "id": 88,
-        "name": "United Kingdom",
-        "list_of_monuments": []
+        "name": "United Kingdom"
     },
     {
         "id": 89,
-        "name": "Vietnam",
-        "list_of_monuments": []
+        "name": "Vietnam"
     },
     {
         "id": 90,
-        "name": "Hong Kong",
-        "list_of_monuments": []
+        "name": "Hong Kong"
     },
     {
         "id": 91,
-        "name": "Antigua and Barbuda",
-        "list_of_monuments": []
+        "name": "Antigua and Barbuda"
     },
     {
         "id": 92,
-        "name": "Anguilla",
-        "list_of_monuments": []
+        "name": "Anguilla"
     },
     {
         "id": 93,
-        "name": "Myanmar (Burma)",
-        "list_of_monuments": []
+        "name": "Myanmar (Burma)"
     },
     {
         "id": 94,
-        "name": "Burundi",
-        "list_of_monuments": []
+        "name": "Burundi"
     },
     {
         "id": 95,
-        "name": "Egypt",
-        "list_of_monuments": []
+        "name": "Egypt"
     },
     {
         "id": 96,
-        "name": "Equatorial Guinea",
-        "list_of_monuments": []
+        "name": "Equatorial Guinea"
     },
     {
         "id": 97,
-        "name": "Kyrgyzstan",
-        "list_of_monuments": []
+        "name": "Kyrgyzstan"
     },
     {
         "id": 98,
-        "name": "South Korea",
-        "list_of_monuments": []
+        "name": "South Korea"
     },
     {
         "id": 99,
-        "name": "Nicaragua",
-        "list_of_monuments": []
+        "name": "Nicaragua"
     },
     {
         "id": 100,
-        "name": "Switzerland",
-        "list_of_monuments": []
+        "name": "Switzerland"
     },
     {
         "id": 101,
-        "name": "Burkina Faso",
-        "list_of_monuments": []
+        "name": "Burkina Faso"
     },
     {
         "id": 102,
-        "name": "Yemen",
-        "list_of_monuments": []
+        "name": "Yemen"
     },
     {
         "id": 103,
-        "name": "United States of America",
-        "list_of_monuments": []
+        "name": "United States of America"
     },
     {
         "id": 104,
-        "name": "Comoros",
-        "list_of_monuments": []
+        "name": "Comoros"
     },
     {
         "id": 105,
-        "name": "San Marino",
-        "list_of_monuments": []
+        "name": "San Marino"
     },
     {
         "id": 106,
-        "name": "Tunisia",
-        "list_of_monuments": []
+        "name": "Tunisia"
     },
     {
         "id": 107,
-        "name": "Ukraine",
-        "list_of_monuments": []
+        "name": "Ukraine"
     },
     {
         "id": 108,
-        "name": "British Virgin Islands",
-        "list_of_monuments": []
+        "name": "British Virgin Islands"
     },
     {
         "id": 109,
-        "name": "Western Samoa",
-        "list_of_monuments": []
+        "name": "Western Samoa"
     },
     {
         "id": 110,
-        "name": "Cayman Islands",
-        "list_of_monuments": []
+        "name": "Cayman Islands"
     },
     {
         "id": 111,
-        "name": "Denmark",
-        "list_of_monuments": []
+        "name": "Denmark"
     },
     {
         "id": 112,
-        "name": "French Southern & Antarctic Lands",
-        "list_of_monuments": []
+        "name": "French Southern & Antarctic Lands"
     },
     {
         "id": 113,
-        "name": "Lithuania",
-        "list_of_monuments": []
+        "name": "Lithuania"
     },
     {
         "id": 114,
-        "name": "Mayotte",
-        "list_of_monuments": []
+        "name": "Mayotte"
     },
     {
         "id": 115,
-        "name": "Poland",
-        "list_of_monuments": []
+        "name": "Poland"
     },
     {
         "id": 116,
-        "name": "Andorra",
-        "list_of_monuments": []
+        "name": "Andorra"
     },
     {
         "id": 117,
-        "name": "Byelarus",
-        "list_of_monuments": []
+        "name": "Byelarus"
     },
     {
         "id": 118,
-        "name": "Bouvet Island",
-        "list_of_monuments": []
+        "name": "Bouvet Island"
     },
     {
         "id": 119,
-        "name": "Sri Lanka",
-        "list_of_monuments": []
+        "name": "Sri Lanka"
     },
     {
         "id": 120,
-        "name": "Dominica",
-        "list_of_monuments": []
+        "name": "Dominica"
     },
     {
         "id": 121,
-        "name": "Thailand",
-        "list_of_monuments": []
+        "name": "Thailand"
     },
     {
         "id": 122,
-        "name": "Virgin Islands",
-        "list_of_monuments": []
+        "name": "Virgin Islands"
     },
     {
         "id": 123,
-        "name": "Benin",
-        "list_of_monuments": []
+        "name": "Benin"
     },
     {
         "id": 124,
-        "name": "Northern Mariana Islands",
-        "list_of_monuments": []
+        "name": "Northern Mariana Islands"
     },
     {
         "id": 125,
-        "name": "Costa Rica",
-        "list_of_monuments": []
+        "name": "Costa Rica"
     },
     {
         "id": 126,
-        "name": "Fiji",
-        "list_of_monuments": []
+        "name": "Fiji"
     },
     {
         "id": 127,
-        "name": "Madagascar",
-        "list_of_monuments": []
+        "name": "Madagascar"
     },
     {
         "id": 128,
-        "name": "Macau",
-        "list_of_monuments": []
+        "name": "Macau"
     },
     {
         "id": 129,
-        "name": "Chile",
-        "list_of_monuments": []
+        "name": "Chile"
     },
     {
         "id": 130,
-        "name": "Cameroon",
-        "list_of_monuments": []
+        "name": "Cameroon"
     },
     {
         "id": 131,
-        "name": "Greenland",
-        "list_of_monuments": []
+        "name": "Greenland"
     },
     {
         "id": 132,
-        "name": "Croatia",
-        "list_of_monuments": []
+        "name": "Croatia"
     },
     {
         "id": 133,
-        "name": "North Korea",
-        "list_of_monuments": []
+        "name": "North Korea"
     },
     {
         "id": 134,
-        "name": "Niger",
-        "list_of_monuments": []
+        "name": "Niger"
     },
     {
         "id": 135,
-        "name": "Seychelles",
-        "list_of_monuments": []
+        "name": "Seychelles"
     },
     {
         "id": 136,
-        "name": "Bulgaria",
-        "list_of_monuments": []
+        "name": "Bulgaria"
     },
     {
         "id": 137,
-        "name": "Finland",
-        "list_of_monuments": []
+        "name": "Finland"
     },
     {
         "id": 138,
-        "name": "Baker Island",
-        "list_of_monuments": []
+        "name": "Baker Island"
     },
     {
         "id": 139,
-        "name": "Guatemala",
-        "list_of_monuments": []
+        "name": "Guatemala"
     },
     {
         "id": 140,
-        "name": "Marshall Islands",
-        "list_of_monuments": []
+        "name": "Marshall Islands"
     },
     {
         "id": 141,
-        "name": "Turkey",
-        "list_of_monuments": []
+        "name": "Turkey"
     },
     {
         "id": 142,
-        "name": "Uzbekistan",
-        "list_of_monuments": []
+        "name": "Uzbekistan"
     },
     {
         "id": 143,
-        "name": "Wake Island",
-        "list_of_monuments": []
+        "name": "Wake Island"
     },
     {
         "id": 144,
-        "name": "Swaziland",
-        "list_of_monuments": []
+        "name": "Swaziland"
     },
     {
         "id": 145,
-        "name": "Solomon Islands",
-        "list_of_monuments": []
+        "name": "Solomon Islands"
     },
     {
         "id": 146,
-        "name": "Cape Verde",
-        "list_of_monuments": []
+        "name": "Cape Verde"
     },
     {
         "id": 147,
-        "name": "Cook Islands",
-        "list_of_monuments": []
+        "name": "Cook Islands"
     },
     {
         "id": 148,
-        "name": "Heard Island & McDonald Islands",
-        "list_of_monuments": []
+        "name": "Heard Island & McDonald Islands"
     },
     {
         "id": 149,
-        "name": "Liechtenstein",
-        "list_of_monuments": []
+        "name": "Liechtenstein"
     },
     {
         "id": 150,
-        "name": "Moldova",
-        "list_of_monuments": []
+        "name": "Moldova"
     },
     {
         "id": 151,
-        "name": "Monaco",
-        "list_of_monuments": []
+        "name": "Monaco"
     },
     {
         "id": 152,
-        "name": "Midway Islands",
-        "list_of_monuments": []
+        "name": "Midway Islands"
     },
     {
         "id": 153,
-        "name": "Mauritania",
-        "list_of_monuments": []
+        "name": "Mauritania"
     },
     {
         "id": 154,
-        "name": "Paraguay",
-        "list_of_monuments": []
+        "name": "Paraguay"
     },
     {
         "id": 155,
-        "name": "Sudan",
-        "list_of_monuments": []
+        "name": "Sudan"
     },
     {
         "id": 156,
-        "name": "Wallis and Futuna",
-        "list_of_monuments": []
+        "name": "Wallis and Futuna"
     },
     {
         "id": 157,
-        "name": "Bolivia",
-        "list_of_monuments": []
+        "name": "Bolivia"
     },
     {
         "id": 158,
-        "name": "Chad",
-        "list_of_monuments": []
+        "name": "Chad"
     },
     {
         "id": 159,
-        "name": "Cocos (Keeling) Islands",
-        "list_of_monuments": []
+        "name": "Cocos (Keeling) Islands"
     },
     {
         "id": 160,
-        "name": "Gabon",
-        "list_of_monuments": []
+        "name": "Gabon"
     },
     {
         "id": 161,
-        "name": "British Indian Ocean Territory",
-        "list_of_monuments": []
+        "name": "British Indian Ocean Territory"
     },
     {
         "id": 162,
-        "name": "Liberia",
-        "list_of_monuments": []
+        "name": "Liberia"
     },
     {
         "id": 163,
-        "name": "Mali",
-        "list_of_monuments": []
+        "name": "Mali"
     },
     {
         "id": 164,
-        "name": "Mauritius",
-        "list_of_monuments": []
+        "name": "Mauritius"
     },
     {
         "id": 165,
-        "name": "Puerto Rico",
-        "list_of_monuments": []
+        "name": "Puerto Rico"
     },
     {
         "id": 166,
-        "name": "Brazil",
-        "list_of_monuments": []
+        "name": "Brazil"
     },
     {
         "id": 167,
-        "name": "China",
-        "list_of_monuments": []
+        "name": "China"
     },
     {
         "id": 168,
-        "name": "Martinique",
-        "list_of_monuments": []
+        "name": "Martinique"
     },
     {
         "id": 169,
-        "name": "Montenegro",
-        "list_of_monuments": []
+        "name": "Montenegro"
     },
     {
         "id": 170,
-        "name": "Mexico",
-        "list_of_monuments": []
+        "name": "Mexico"
     },
     {
         "id": 171,
-        "name": "Vanuatu",
-        "list_of_monuments": []
+        "name": "Vanuatu"
     },
     {
         "id": 172,
-        "name": "Panama",
-        "list_of_monuments": []
+        "name": "Panama"
     },
     {
         "id": 173,
-        "name": "Saudi Arabia",
-        "list_of_monuments": []
+        "name": "Saudi Arabia"
     },
     {
         "id": 174,
-        "name": "South Africa",
-        "list_of_monuments": []
+        "name": "South Africa"
     },
     {
         "id": 175,
-        "name": "Sierra Leone",
-        "list_of_monuments": []
+        "name": "Sierra Leone"
     },
     {
         "id": 176,
-        "name": "St. Lucia",
-        "list_of_monuments": []
+        "name": "St. Lucia"
     },
     {
         "id": 177,
-        "name": "Tonga",
-        "list_of_monuments": []
+        "name": "Tonga"
     },
     {
         "id": 178,
-        "name": "Uruguay",
-        "list_of_monuments": []
+        "name": "Uruguay"
     },
     {
         "id": 179,
-        "name": "Botswana",
-        "list_of_monuments": []
+        "name": "Botswana"
     },
     {
         "id": 180,
-        "name": "Bermuda",
-        "list_of_monuments": []
+        "name": "Bermuda"
     },
     {
         "id": 181,
-        "name": "El Salvador",
-        "list_of_monuments": []
+        "name": "El Salvador"
     },
     {
         "id": 182,
-        "name": "France",
-        "list_of_monuments": []
+        "name": "France"
     },
     {
         "id": 183,
-        "name": "Hungary",
-        "list_of_monuments": []
+        "name": "Hungary"
     },
     {
         "id": 184,
-        "name": "Juan De Nova Island",
-        "list_of_monuments": []
+        "name": "Juan De Nova Island"
     },
     {
         "id": 185,
-        "name": "Spratly Islands",
-        "list_of_monuments": []
+        "name": "Spratly Islands"
     },
     {
         "id": 186,
-        "name": "Western Sahara",
-        "list_of_monuments": []
+        "name": "Western Sahara"
     },
     {
         "id": 187,
-        "name": "Ireland",
-        "list_of_monuments": []
+        "name": "Ireland"
     },
     {
         "id": 188,
-        "name": "Estonia",
-        "list_of_monuments": []
+        "name": "Estonia"
     },
     {
         "id": 189,
-        "name": "Grenada",
-        "list_of_monuments": []
+        "name": "Grenada"
     },
     {
         "id": 190,
-        "name": "Netherlands",
-        "list_of_monuments": []
+        "name": "Netherlands"
     },
     {
         "id": 191,
-        "name": "Russia",
-        "list_of_monuments": []
+        "name": "Russia"
     },
     {
         "id": 192,
-        "name": "Somalia",
-        "list_of_monuments": []
+        "name": "Somalia"
     },
     {
         "id": 193,
-        "name": "Djibouti",
-        "list_of_monuments": []
+        "name": "Djibouti"
     },
     {
         "id": 194,
-        "name": "Ethiopia",
-        "list_of_monuments": []
+        "name": "Ethiopia"
     },
     {
         "id": 195,
-        "name": "Guernsey",
-        "list_of_monuments": []
+        "name": "Guernsey"
     },
     {
         "id": 196,
-        "name": "Jersey",
-        "list_of_monuments": []
+        "name": "Jersey"
     },
     {
         "id": 197,
-        "name": "Kuwait",
-        "list_of_monuments": []
+        "name": "Kuwait"
     },
     {
         "id": 198,
-        "name": "Maldives",
-        "list_of_monuments": []
+        "name": "Maldives"
     },
     {
         "id": 199,
-        "name": "Malaysia",
-        "list_of_monuments": []
+        "name": "Malaysia"
     },
     {
         "id": 200,
-        "name": "Pitcairn Islands",
-        "list_of_monuments": []
+        "name": "Pitcairn Islands"
     },
     {
         "id": 201,
-        "name": "Philippines",
-        "list_of_monuments": []
+        "name": "Philippines"
     },
     {
         "id": 202,
-        "name": "Rwanda",
-        "list_of_monuments": []
+        "name": "Rwanda"
     },
     {
         "id": 203,
-        "name": "Namibia",
-        "list_of_monuments": []
+        "name": "Namibia"
     },
     {
         "id": 204,
-        "name": "Azerbaijan",
-        "list_of_monuments": []
+        "name": "Azerbaijan"
     },
     {
         "id": 205,
-        "name": "Canada",
-        "list_of_monuments": []
+        "name": "Canada"
     },
     {
         "id": 206,
-        "name": "Glorioso Islands",
-        "list_of_monuments": []
+        "name": "Glorioso Islands"
     },
     {
         "id": 207,
-        "name": "Johnston Atoll",
-        "list_of_monuments": []
+        "name": "Johnston Atoll"
     },
     {
         "id": 208,
-        "name": "Mongolia",
-        "list_of_monuments": []
+        "name": "Mongolia"
     },
     {
         "id": 209,
-        "name": "Pacific Islands (Palau)",
-        "list_of_monuments": []
+        "name": "Pacific Islands (Palau)"
     },
     {
         "id": 210,
-        "name": "Guinea-Bissau",
-        "list_of_monuments": []
+        "name": "Guinea-Bissau"
     },
     {
         "id": 211,
-        "name": "St. Kitts and Nevis",
-        "list_of_monuments": []
+        "name": "St. Kitts and Nevis"
     },
     {
         "id": 212,
-        "name": "Togo",
-        "list_of_monuments": []
+        "name": "Togo"
     },
     {
         "id": 213,
-        "name": "Antarctica",
-        "list_of_monuments": []
+        "name": "Antarctica"
     },
     {
         "id": 214,
-        "name": "Cambodia",
-        "list_of_monuments": []
+        "name": "Cambodia"
     },
     {
         "id": 215,
-        "name": "Falkland Islands (Islas Malvinas)",
-        "list_of_monuments": []
+        "name": "Falkland Islands (Islas Malvinas)"
     },
     {
         "id": 216,
-        "name": "Germany",
-        "list_of_monuments": []
+        "name": "Germany"
     },
     {
         "id": 217,
-        "name": "Haiti",
-        "list_of_monuments": []
+        "name": "Haiti"
     },
     {
         "id": 218,
-        "name": "Iceland",
-        "list_of_monuments": []
+        "name": "Iceland"
     },
     {
         "id": 219,
-        "name": "Jamaica",
-        "list_of_monuments": []
+        "name": "Jamaica"
     },
     {
         "id": 220,
-        "name": "Peru",
-        "list_of_monuments": []
+        "name": "Peru"
     },
     {
         "id": 221,
-        "name": "Slovenia",
-        "list_of_monuments": []
+        "name": "Slovenia"
     },
     {
         "id": 222,
-        "name": "Singapore",
-        "list_of_monuments": []
+        "name": "Singapore"
     },
     {
         "id": 223,
-        "name": "Svalbard",
-        "list_of_monuments": []
+        "name": "Svalbard"
     },
     {
         "id": 224,
-        "name": "Trinidad and Tobago",
-        "list_of_monuments": []
+        "name": "Trinidad and Tobago"
     },
     {
         "id": 225,
-        "name": "Zimbabwe",
-        "list_of_monuments": []
+        "name": "Zimbabwe"
     },
     {
         "id": 226,
-        "name": "Gibraltar",
-        "list_of_monuments": []
+        "name": "Gibraltar"
     },
     {
         "id": 227,
-        "name": "Guinea",
-        "list_of_monuments": []
+        "name": "Guinea"
     },
     {
         "id": 228,
-        "name": "Gaza Strip",
-        "list_of_monuments": []
+        "name": "Gaza Strip"
     },
     {
         "id": 229,
-        "name": "Christmas Island",
-        "list_of_monuments": []
+        "name": "Christmas Island"
     },
     {
         "id": 230,
-        "name": "Malawi",
-        "list_of_monuments": []
+        "name": "Malawi"
     },
     {
         "id": 231,
-        "name": "New Zealand",
-        "list_of_monuments": []
+        "name": "New Zealand"
     },
     {
         "id": 232,
-        "name": "Reunion",
-        "list_of_monuments": []
+        "name": "Reunion"
     },
     {
         "id": 233,
-        "name": "St. Pierre and Miquelon",
-        "list_of_monuments": []
+        "name": "St. Pierre and Miquelon"
     },
     {
         "id": 234,
-        "name": "Serbia",
-        "list_of_monuments": []
+        "name": "Serbia"
     },
     {
         "id": 235,
-        "name": "Afghanistan",
-        "list_of_monuments": []
+        "name": "Afghanistan"
     },
     {
         "id": 236,
-        "name": "Georgia",
-        "list_of_monuments": []
+        "name": "Georgia"
     },
     {
         "id": 237,
-        "name": "Greece",
-        "list_of_monuments": []
+        "name": "Greece"
     },
     {
         "id": 238,
-        "name": "Jordan",
-        "list_of_monuments": []
+        "name": "Jordan"
     },
     {
         "id": 239,
-        "name": "Slovakia",
-        "list_of_monuments": []
+        "name": "Slovakia"
     },
     {
         "id": 240,
-        "name": "Oman",
-        "list_of_monuments": []
+        "name": "Oman"
     },
     {
         "id": 241,
-        "name": "Qatar",
-        "list_of_monuments": []
+        "name": "Qatar"
     },
     {
         "id": 242,
-        "name": "Brunei",
-        "list_of_monuments": []
+        "name": "Brunei"
     },
     {
         "id": 243,
-        "name": "Czech Republic",
-        "list_of_monuments": []
+        "name": "Czech Republic"
     },
     {
         "id": 244,
-        "name": "Guadeloupe",
-        "list_of_monuments": []
+        "name": "Guadeloupe"
     },
     {
         "id": 245,
-        "name": "Laos",
-        "list_of_monuments": []
+        "name": "Laos"
     },
     {
         "id": 246,
-        "name": "Libya",
-        "list_of_monuments": []
+        "name": "Libya"
     },
     {
         "id": 247,
-        "name": "Montserrat",
-        "list_of_monuments": []
+        "name": "Montserrat"
     },
     {
         "id": 248,
-        "name": "Malta",
-        "list_of_monuments": []
+        "name": "Malta"
     },
     {
         "id": 249,
-        "name": "Norfolk Island",
-        "list_of_monuments": []
+        "name": "Norfolk Island"
     },
     {
         "id": 250,
-        "name": "United Arab Emirates",
-        "list_of_monuments": []
+        "name": "United Arab Emirates"
     },
     {
         "id": 251,
-        "name": "Tuvalu",
-        "list_of_monuments": []
+        "name": "Tuvalu"
     },
     {
         "id": 252,
-        "name": "Zambia",
-        "list_of_monuments": []
+        "name": "Zambia"
     }
 ]
