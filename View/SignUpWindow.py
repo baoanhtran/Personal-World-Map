@@ -29,26 +29,40 @@ class SignUpWindow(tk.Tk):
 
 
     def new_account(self, event):
-        username = self.username.get()
-        password = self.password.get()
-        isAdded, user = register_user(username, password)
-        if isAdded:
-            MapWindow(user)
-            self.quit()
-        else:
+        username = self.username.get().strip()
+        password = self.password.get().strip()
+
+        if username == "" or password == "":
             # If error message already exists, destroy it
             if hasattr(self, "label3"):
                 self.label3.destroy()
 
-            self.label3 = tk.Label(self, text = "This username is already taken", font = ("Courier", 10), fg="red")
-            self.label3.place(x = 50, y = 350, width = 400, height = 30)
+            self.label3 = tk.Label(self, text = "Please type all fields", font = ("Courier", 10), fg="red")
+            self.label3.place(x = 50, y = 400, width = 400, height = 30)
+        else:
+            isAdded, user = register_user(username, password)
+            if isAdded:
+                # Unbind events before destruction
+                self.btn1.unbind('<Button-1>')
 
-            # Clear the entry
-            self.username.delete(0, 'end')
-            self.password.delete(0, 'end')
+                # Delay destruction to ensure event handler completes
+                self.user = user
+                self.after(100, self.open_map_window)
+            else:
+                # If error message already exists, destroy it
+                if hasattr(self, "label3"):
+                    self.label3.destroy()
 
-            # Focus on the username entry
-            self.username.focus()
+                self.label3 = tk.Label(self, text = "This username is already taken", font = ("Courier", 10), fg="red")
+                self.label3.place(x = 50, y = 350, width = 400, height = 30)
 
-    def quit(self):
+                # Clear the entry
+                self.username.delete(0, 'end')
+                self.password.delete(0, 'end')
+
+                # Focus on the username entry
+                self.username.focus()
+
+    def open_map_window(self):
         self.destroy()
+        MapWindow(self.user)

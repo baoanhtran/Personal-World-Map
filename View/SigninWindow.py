@@ -36,7 +36,16 @@ class LoginWindow(tk.Tk):
     def login(self, event):
         username_val = self.username.get().strip()
         password_val = self.password.get().strip()
-        if login_success(username_val, password_val)[0]:
+
+        if username_val == "" or password_val == "":
+            # If error message already exists, destroy it
+            if hasattr(self, "label3"):
+                self.label3.destroy()
+
+            # Label for error message
+            self.label3 = tk.Label(self, text = "Please type all fields", font = ("Courier", 10), fg="red")
+            self.label3.place(x = 50, y = 400, width = 400, height = 30)
+        elif login_success(username_val, password_val)[0]:
             self.user = login_success(username_val, password_val)[1]
 
             # Unbind events before destruction
@@ -51,7 +60,7 @@ class LoginWindow(tk.Tk):
                 self.label3.destroy()
 
             # Label for error message
-            self.label3 = tk.Label(self, text = "Wrong Password or Username", font = ("Courier", 10), fg="red")
+            self.label3 = tk.Label(self, text = "Wrong username or password", font = ("Courier", 10), fg="red")
             self.label3.place(x = 50, y = 400, width = 400, height = 30)
 
             # Clear the entry
