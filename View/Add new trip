@@ -1,0 +1,45 @@
+import json
+import tkinter as tk
+
+class AddNewTripWindow(tk.Tk):
+    '''
+    If there is a click on a non visited country (equivalent to the user wants to add a new trip), this window opens.
+    It enables you to enter the information about your new try: dates, text, transport.
+    You can calculate the associated carbon footprint from this window.
+    '''
+
+    def __init__(self, fichier): #use the bata base
+        super().__init__()
+        self.fichier = fichier
+        self.title("Add New Trip")
+        self.geometry("500x500")
+        self.label_1 = tk.Label(self, text="The Place you are travelling to:", font='Helvetica 10 bold')
+        self.label_1.place(relx=.5, rely=.4, anchor=tk.N)
+        self.entry_1 = tk.Entry(self)
+        self.entry_1.place(relx=.5, rely=.5, anchor=tk.N)
+
+        #if click on a non visited country
+        if visited(self.entry_1.get()) == True:
+            self.hint = "You have already been to this place"
+            self.hint.place(relx=.5, rely=.5, anchor=tk.C)
+        else:
+            self.add_new_info()
+
+            # Button to show carbon footprint
+            calculate_button = tk.Button(self, text="Calculate carbon footprint", command=self.carbon_footprint) #CarbonFootPrint
+            calculate_button.place(relx=.5, rely=.9, anchor=tk.CENTER)
+
+    def visited(self):#return True if the input country has been visited
+        pass
+
+    def add_new_info(self):
+        self.new_date = tk.Entry(self)
+        self.new_text = tk.Entry(self)
+        self.new_transport = tl.Entry(self)
+
+
+if __name__ == "__main__":
+    app = AddNewTripWindow()
+    app.mainloop()
+
+
