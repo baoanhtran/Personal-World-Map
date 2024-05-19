@@ -10,5 +10,53 @@
         "country_id": 103,
         "name": "Statue of Liberty",
         "description": "The Statue of Liberty is a colossal neoclassical sculpture on Liberty Island in New York Harbor in New York City, in the United States."
+    },
+    {
+        "id": 3,
+        "country_id": 62,
+        "name": "Belém Tower",
+        "description": "The Belém Tower is a 16th century fortification located in Lisbon, Portugal, which served as an embarkation and disembarkation point for Portuguese explorers."
+    },
+    {
+        "id": 4,
+        "country_id": 63,
+        "name": "SThe Sagrada Familia",
+        "description": "The Sagrada Familia is a Basilica in Barcelona, Spain, whose construction started in 1882 and is still not finished to this day."
+    },
+    {
+        "id": 5,
+        "country_id": 56,
+        "name": "Colosseum",
+        "description": "The Colosseum is the largest ancient amphitheater ever built in History and is still standing to this day in the center of Rome, Italy."
+    },
+    {
+        "id": 6,
+        "country_id": 56,
+        "name": "Leaning Tower of Pisa",
+        "description": "The Leaning Tower of Pisa is a free standing bell tower in Pisa, Italy, known for its nearly four-degree lean, the result of an unstable foundation. "
+    },
+    {
+        "id": 7,
+        "country_id": 56,
+        "name": "Duomo di Milano",
+        "description": "The Duomo di Milano is a pink-hued white marble basilica considered to be one of the largest gothic buildings in the world."
+    },
+    {
+        "id": 8,
+        "country_id": 56,
+        "name": "Valley dei Templi",
+        "description": "The Valley dei Templi features 11 temples, 3 sanctuaries, a necropolis, hydraulic works, fortifications, and many more historical monuments dating back from the 5th-6th century."
+    },
+    {
+        "id": 9,
+        "country_id": 51,
+        "name": "Sydney Opera House",
+        "description": "The Sydney Opera House is a multivenue performing arts centre located on the foreshore of Sydney Harbour, Australia. It is widely regarded as one of the world's most famous and distinctive buildings and a masterpiece of 20th-century architecture."
+    },
+    {
+        "id": 10,
+        "country_id": 41,
+        "name": "Taj Mahal",
+        "description": "The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in Agra, Uttar Pradesh, India. It was built by the fifth Mughal emperor, Shah Jahan in 1631 in memory of his third and most favourite wife,Mumtaz Mahal, a Muslim Persian princess."
     }
 ]
