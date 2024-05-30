@@ -4,21 +4,24 @@ from Controller.LoginController import login_success
 from View.SignUpWindow import SignUpWindow
 from View.MapWindow import MapWindow
 
-class LoginWindow(ctk.CTk):
+class LoginWindow(tk.Tk):
     __slots__ = ["label1", "label2", "label3", "username", "password", "button1", "button2", "title1", "canva"]
 
     def __init__(self):
+        ctk.set_appearance_mode("light")
+
         super().__init__()
         self.title("Your personal travel map")
         self.geometry("500x500")
+        self.resizable(False, False)
 
         # Apply custom color theme
-        self.canva = ctk.CTkCanvas(width=500, height=500, bg='#f5f6f9')
-        self.canva.pack(expand="YES", fill="both")
+        self.canva = ctk.CTkCanvas(width=500, height=500)
+        self.canva.pack()
 
         # Load the .gif image file.
         img1 = tk.PhotoImage(file="View/pictures/bg_map.png")
-        self.canva.create_image(50, 50, image=img1, anchor="nw")
+        self.canva.create_image(0, 0, image=img1, anchor="nw")
 
 
         self.title1 = ctk.CTkLabel(self,text = "Your personal travel map", font = ("Impact", 25), text_color='#354f52', fg_color= "#f5f6f9")
@@ -56,8 +59,8 @@ class LoginWindow(ctk.CTk):
                 self.label3.destroy()
 
             # Label for error message
-            self.label3 = ctk.CTkLabel(self, text = "Please type all fields", font = ("Courier", 10), fg="red")
-            self.label3.place(x = 50, y = 400, width = 400, height = 30)
+            self.label3 = ctk.CTkLabel(self, text = "Please type all fields", font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
+            self.label3.place(x = 50, y = 400)
         elif login_success(username_val, password_val)[0]:
             self.user = login_success(username_val, password_val)[1]
 
@@ -73,8 +76,8 @@ class LoginWindow(ctk.CTk):
                 self.label3.destroy()
 
             # Label for error message
-            self.label3 = ctk.CTkLabel(self, text = "Wrong username or password", font = ("Courier", 10), fg="red")
-            self.label3.place(x = 50, y = 400, width = 400, height = 30)
+            self.label3 = ctk.CTkLabel(self, text = "Wrong username or password", font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
+            self.label3.place(x = 50, y = 400)
 
             # Clear the entry
             self.username.delete(0, 'end')
@@ -102,5 +105,3 @@ class LoginWindow(ctk.CTk):
     def quit(self):
         self.destroy()
         
-
-

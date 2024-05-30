@@ -3,6 +3,8 @@ import customtkinter as ctk
 from PIL import Image
 from tkinter import messagebox
 from Model.Map import Map
+from View.InfoCountryWindow import InfoCountryWindow
+from View.PlanNewTripWindow import PlanNewTripWindow
 from CustomWidget.ZoomableCanvas import ZoomableCanvas
 from Controller.MapController import get_country_name, get_incoming_trips, get_all_countries_visited, get_description
 from datetime import datetime
@@ -26,7 +28,7 @@ class MapWindow(ctk.CTk):
         icon6 = Image.open("View/pictures/quit_icon.png")
 
         # Quit button
-        quit_button = ctk.CTkButton(self, text="Quit", text_color= "#f5f6f9", fg_color= '#354f52', font=("Arial", 28, "bold"), hover_color = "#e2eafc", border_color = '#354f52',  image = ctk.CTkImage(dark_image=icon6, light_image=icon6))
+        quit_button = ctk.CTkButton(self, text="Quit", text_color= "#f5f6f9", fg_color= '#354f52', font=("Arial", 28, "bold"), hover_color = "#74a098", border_color = '#354f52',  image = ctk.CTkImage(dark_image=icon6, light_image=icon6))
         quit_button.bind("<Button-1>", self.quit)
         quit_button.pack(side="top", fill="x")
 
@@ -44,19 +46,20 @@ class MapWindow(ctk.CTk):
         self.canva.create_image(self.canva.winfo_reqwidth()/2, self.canva.winfo_reqheight()/2, image=icon1, anchor = "center")
 
         # Button to show all trips
-        self.button1 = ctk.CTkButton(self.side_bar, text="Show all my trips", text_color="#f5f6f9", fg_color= "transparent", border_color = "#f5f6f9", hover_color = "#e2eafc", corner_radius= 32,   font=("Arial", 15, "bold") ,height=2, image = ctk.CTkImage(dark_image=icon2, light_image=icon2))
+        self.button1 = ctk.CTkButton(self.side_bar, text="Show all my trips", text_color="#f5f6f9", fg_color= "transparent", border_color = "#f5f6f9", hover_color = "#74a098", corner_radius= 32,   font=("Arial", 15, "bold") ,height=2, image = ctk.CTkImage(dark_image=icon2, light_image=icon2))
         self.button1.pack(side="top")
 
         # Button to plan a new trip
-        self.button2 = ctk.CTkButton(self.side_bar, text="Plan a new trip", text_color="#f5f6f9", fg_color= "transparent", font=("Arial", 15, "bold"), hover_color = "#e2eafc",border_color = "#f5f6f9", corner_radius= 32, height=2, image = ctk.CTkImage(dark_image=icon3, light_image=icon3))
+        self.button2 = ctk.CTkButton(self.side_bar, text="Plan a new trip", text_color="#f5f6f9", fg_color= "transparent", font=("Arial", 15, "bold"), hover_color = "#74a098",border_color = "#f5f6f9", corner_radius= 32, height=2, image = ctk.CTkImage(dark_image=icon3, light_image=icon3))
         self.button2.pack(side="top", pady=10, padx=10)
+        self.button2.bind("<Button-1>", self.plan_new_trip)
 
         # Button to change password
-        self.button3 = ctk.CTkButton(self.side_bar, text="Change password", text_color="#f5f6f9", fg_color= "transparent", font=("Arial", 15, "bold"), hover_color = "#e2eafc",border_color = "#f5f6f9", corner_radius= 32, height=2, image = ctk.CTkImage(dark_image=icon4, light_image=icon4))
+        self.button3 = ctk.CTkButton(self.side_bar, text="Change password", text_color="#f5f6f9", fg_color= "transparent", font=("Arial", 15, "bold"), hover_color = "#74a098",border_color = "#f5f6f9", corner_radius= 32, height=2, image = ctk.CTkImage(dark_image=icon4, light_image=icon4))
         self.button3.pack(side="top", pady=10, padx=10)
 
         # Button to sign out
-        self.button4 = ctk.CTkButton(self.side_bar, text="Sign out", text_color="#f5f6f9", fg_color= "transparent", font=("Arial", 15, "bold"), hover_color = "#e2eafc",border_color = "#f5f6f9", corner_radius= 32,  height=2, image = ctk.CTkImage(dark_image=icon5, light_image=icon5))
+        self.button4 = ctk.CTkButton(self.side_bar, text="Sign out", text_color="#f5f6f9", fg_color= "transparent", font=("Arial", 15, "bold"), hover_color = "#74a098",border_color = "#f5f6f9", corner_radius= 32,  height=2, image = ctk.CTkImage(dark_image=icon5, light_image=icon5))
         self.button4.bind("<Button-1>", lambda event: self.sign_out())
         self.button4.pack(side="bottom", pady=10, padx=10)
 
@@ -99,10 +102,14 @@ class MapWindow(ctk.CTk):
                     else:
                         poly = self.canevas.create_polygon(ele, fill="#f5f6f9", outline='#354f52')
                         self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
-
+    
+    def plan_new_trip(self, event):
+        PlanNewTripWindow()
 
     def show_country(self, country):
-        messagebox.showinfo(country, get_description(country))
+        #get_description(country)
+        #messagebox.showinfo("name of the country", country)
+        InfoCountryWindow(self.user, country)
 
     def show_reminders(self):
         reminders = get_incoming_trips(self.user.id)
