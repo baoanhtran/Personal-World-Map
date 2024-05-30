@@ -38,3 +38,21 @@ def add_user(username, password):
     user_obj = User(user_id, username, password, 0)
     
     return user_obj
+
+def change_password_by_id(user_id, new_password):
+    with open("Database/Entity/users.json", "r") as file:
+        users = json.load(file)
+        for user in users:
+            if user["id"] == user_id:
+                user["password"] = new_password
+                break
+                
+    with open("Database/Entity/users.json", "w") as file:
+        json.dump(users, file, indent=4)
+
+def get_password_by_id(user_id):
+    with open("Database/Entity/users.json", "r") as file:
+        users = json.load(file)
+        for user in users:
+            if user["id"] == user_id:
+                return user["password"]

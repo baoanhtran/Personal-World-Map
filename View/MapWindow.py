@@ -52,6 +52,7 @@ class MapWindow(tk.Tk):
 
         # Button to change password
         self.button3 = ctk.CTkButton(self.side_bar, text="Change password", text_color="#f5f6f9", fg_color= "transparent", font=("Arial", 15, "bold"), hover_color = "#e2eafc",border_color = "#f5f6f9", corner_radius= 32, height=2, image = ctk.CTkImage(dark_image=icon4, light_image=icon4))
+        self.button3.bind("<Button-1>", self.change_password)
         self.button3.pack(side="top", pady=10, padx=10)
 
         # Button to sign out
@@ -85,7 +86,7 @@ class MapWindow(tk.Tk):
                 for ele in v:
                     for ele2 in ele:
                         if k in visited_countries:
-                            poly = self.canevas.create_polygon(ele2, fill="#354f52", outline='#354f52')
+                            poly = self.canevas.create_polygon(ele2, fill="#eb4934", outline='#eb4934')
                             self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
                         else:
                             poly = self.canevas.create_polygon(ele2, fill="#f5f6f9", outline='#354f52')
@@ -93,7 +94,7 @@ class MapWindow(tk.Tk):
             elif self.map.list_depth(v) == 3:
                 for ele in v:
                     if k in visited_countries:
-                        poly = self.canevas.create_polygon(ele, fill="#354f52", outline='#354f52')
+                        poly = self.canevas.create_polygon(ele, fill="#eb4934", outline='#eb4934')
                         self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
                     else:
                         poly = self.canevas.create_polygon(ele, fill="#f5f6f9", outline='#354f52')
@@ -117,6 +118,10 @@ class MapWindow(tk.Tk):
                 else:
                     message += f"You have a trip from {departure} to {destination} on {date}.\n"
             messagebox.showinfo("Reminders", message)
+
+    def change_password(self, event):
+        from View.ChangePasswordWindow import ChangePasswordWindow
+        ChangePasswordWindow(self.user)
 
     def sign_out(self):
         if not messagebox.askokcancel("Sign out", "Are you sure you want to sign out ?"):

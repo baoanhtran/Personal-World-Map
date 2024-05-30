@@ -1,8 +1,11 @@
 import tkinter as tk
+
 import customtkinter as ctk
+
 from Controller.LoginController import login_success
-from View.SignUpWindow import SignUpWindow
 from View.MapWindow import MapWindow
+from View.SignUpWindow import SignUpWindow
+
 
 class LoginWindow(tk.Tk):
     __slots__ = ["label1", "label2", "label3", "username", "password", "button1", "button2", "title1", "canva"]
