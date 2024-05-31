@@ -7,7 +7,7 @@ from View.PlanNewTripWindow import PlanNewTripWindow
 
 
 class InfoCountryWindow(ctk.CTk): # ENORA
-    __slots__ = ["user", "country_destination"]
+    __slots__ = ["user", "country_destination", "icon1"]
 
     def __init__(self, user, country_destination):
         super().__init__()
@@ -20,12 +20,12 @@ class InfoCountryWindow(ctk.CTk): # ENORA
         string_monuments = get_despcriptions_monuments_by_country_id(self.country_id)
 
         # Image import
-        #icon1 = tk.PhotoImage(file="View/pictures/map_icon.png")
+        # self.icon1 = tk.PhotoImage(file="View/pictures/map_icon.png")
 
         # Background canva
-        #self.canva = ctk.CTkCanvas(self, bg='#f5f6f9', highlightthickness = 0)
-        #self.canva.pack(expand="YES")
-        #self.canva.create_image(self.canva.winfo_reqwidth()/2, self.canva.winfo_reqheight()/2, image=icon1, anchor = "center")
+        # self.canva = ctk.CTkCanvas(self, bg='#f5f6f9', highlightthickness = 0)
+        # self.canva.create_image(self.canva.winfo_reqwidth()/2, self.canva.winfo_reqheight()/2, image=self.icon1, anchor = "center")
+        # self.canva.pack(expand="YES")
 
         # Title
         self.title1 = ctk.CTkLabel(self, text=f'{self.country_destination}', text_color='#354f52', fg_color= "#f5f6f9", corner_radius= 32,   font=("Impact", 25, "bold") ,height=2)
