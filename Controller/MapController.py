@@ -30,3 +30,14 @@ def get_all_countries_visited(user_id):
                 countries.append(destination)
 
     return countries
+
+def get_all_countries_to_visit(user_id):
+    countries = []
+    for trip in get_all_trips_by_user_id(user_id):
+        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        if trip.date > today:
+            destination = get_country_name(trip.destination_id)
+            if destination not in countries:
+                countries.append(destination)
+
+    return countries
