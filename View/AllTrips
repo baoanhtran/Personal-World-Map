@@ -4,40 +4,64 @@ from Controller.TripController import get_carbon_footprint
 
 
 class AllTrips(tk.Tk):
-    __slots__ = ["past_trip", "upcoming_trip", "title"]
+    __slots__ = ["canva", "departure", "arrival", "dep_date", 
+                 "return_date", "upcoming_trip", "title", "past_trip", "upcoming_trip"]
     
     def __init__(self):
         super().__init__()
-        self.title()
         self.geometry("500x500")
+        self.widgets()
+        self.mainloop()
         
         
         
     def widgets(self):   
         
-         self.past_trip = tk.Label(self, bg="#354f52", text="Past Trips", 
-                                font = ("Impact", 15), anchor = 'n')
-         self.past_trip.place(relx=0.05, rely=0.15, relheight=0.8, relwidth=0.45)
+         
+        self.canva = tk.Label(self, bg="#354f52")
+        self.canva.place(relx=0.05, rely=0.15, relheight=0.8, relwidth=0.45)
+        
+        
+        self.departure = tk.Label(self, bg="#354f52", text="Departure Country", 
+                                font = ("Impact", 12), anchor = 'n', fg = "white")
+        self.departure.place(relx=0.2, rely=0.15)
+        
+        self.arrival = tk.Label(self, bg="#354f52", text="Arrival Country", 
+                                font = ("Impact", 12), anchor = 'n', fg = "white")
+        self.arrival.place(relx=0.25, rely=0.15)
+        
+         
+        self.dep_date = tk.Label(self, bg="#354f52", text="Departure Date", 
+                                font = ("Impact", 12), anchor = 'n', fg = "white")
+        self.dep_date.place(relx=0.3, rely=0.15)
+        
+        self.return_date = tk.Label(self, bg="#354f52", text="Departure Date", 
+                                font = ("Impact", 12), anchor = 'n', fg = "white")
+        self.return_date.place(relx=0.35, rely=0.15)
+        
+        
+        
+        self.past_trip = tk.Label(self, bg="#354f52", text="Past Trips", 
+                                font = ("Impact", 12), anchor = 'n')
+        self.past_trip.place(relx=0.1, rely=0.4)
           
           
+         
+        self.upcoming_trip = tk.Label(self, bg="#354f52", text="Upcoming Trips", 
+                                       font = ("Impact", 12), fg = "white", anchor = 'n')
+        self.upcoming_trip.place(relx=0.1, rely=0.6,)
           
-         # Upcoming Trip Widget
-         self.upcoming_trip = tk.Label(self, bg="#354f52", text="Upcoming Trips", 
-                                       font = ("Impact", 15), anchor = 'n')
-         self.upcoming_trip.place(relx=0.5, rely=0.15, relheight=0.8, relwidth=0.45)
-          
-         self.title = tk.Label(self, bg= "white", text = "Summary of your Trips", 
+        self.title = tk.Label(self, bg= "white", text = "Summary of your Trips", 
                         font =("Impact", 20, "bold"), fg="#354f52")
-         self.title.place(relx = 0.05, rely=0.05, relheight=0.08, relwidth = 0.90)
-
-         self.quit = tk.Button(self, bg ="#354f52", text = "Return to my map", 
+        self.title.place(relx = 0.05, rely=0.05, relheight=0.08, relwidth = 0.90) 
+         
+         
+        self.quit = tk.Button(self, bg ="#354f52", text = "Return to my map", 
                                font =("Arial", 12, "bold"),fg="white")
-         self.quit.place(relx=0.05, rely=0.85)
-      
+        self.quit.place(relx=0.05, rely=0.85)
       
         
       
     
     def quit(self):
         self.destroy()
-        
