@@ -28,7 +28,12 @@ class AllTrips(tk.Tk):
           
          self.title = tk.Label(self, bg= "white", text = "Summary of your Trips", 
                         font =("Impact", 20, "bold"), fg="#354f52")
-         self.title.place(relx = 0.05, rely=0.05, relheight=0.08, relwidth = 0.90) 
+         self.title.place(relx = 0.05, rely=0.05, relheight=0.08, relwidth = 0.90)
+
+         self.quit = tk.Button(self, bg ="#354f52", text = "Return to my map", 
+                               font =("Arial", 12, "bold"),fg="white")
+         self.quit.place(relx=0.05, rely=0.85)
+      
       
         
       
