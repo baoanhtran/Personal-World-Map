@@ -1,0 +1,38 @@
+import tkinter as tk
+from Controller.TripController import get_country_id_by_name
+from Controller.TripController import get_carbon_footprint
+
+
+class AllTrips(tk.Tk):
+    __slots__ = ["past_trip", "upcoming_trip", "title"]
+    
+    def __init__(self):
+        super().__init__()
+        self.title()
+        self.geometry("500x500")
+        
+        
+        
+    def widgets(self):   
+        
+         self.past_trip = tk.Label(self, bg="#354f52", text="Past Trips", 
+                                font = ("Impact", 15), anchor = 'n')
+         self.past_trip.place(relx=0.05, rely=0.15, relheight=0.8, relwidth=0.45)
+          
+          
+          
+         # Upcoming Trip Widget
+         self.upcoming_trip = tk.Label(self, bg="#354f52", text="Upcoming Trips", 
+                                       font = ("Impact", 15), anchor = 'n')
+         self.upcoming_trip.place(relx=0.5, rely=0.15, relheight=0.8, relwidth=0.45)
+          
+         self.title = tk.Label(self, bg= "white", text = "Summary of your Trips", 
+                        font =("Impact", 20, "bold"), fg="#354f52")
+         self.title.place(relx = 0.05, rely=0.05, relheight=0.08, relwidth = 0.90) 
+      
+        
+      
+    
+    def quit(self):
+        self.destroy()
+        
