@@ -5,7 +5,11 @@ from datetime import datetime
 def get_all_trips_by_user_id(user_id):
     trips = []
     with open("Database/Entity/trips.json", "r") as file:
-        data = json.load(file)
+        json_string = file.read()
+        if not json_string: # if file is empty
+            data = []
+        else:
+            data = json.loads(json_string)
         for i in data:
             if i["user_id"] == user_id:
                 date = datetime.strptime(i["date"], "%d/%m/%Y")
@@ -16,17 +20,23 @@ def get_all_trips_by_user_id(user_id):
 
 def add_trip(user_id, departure_id, destination_id, date):
     with open("Database/Entity/trips.json", "r") as file:
-        trips = json.load(file)
-        new_trip = {
-            "user_id": user_id,
-            "departure_id": departure_id,
-            "destination_id": destination_id,
-            "date": date.strftime("%d/%m/%Y")
-        }
-        trips.append(new_trip)
-        
+        json_string = file.read()
+        if not json_string:
+            trips = []
+        else:
+            trips = json.loads(json_string)
+
+    new_trip = {
+        "user_id": user_id,
+        "departure_id": departure_id,
+        "destination_id": destination_id,
+        "date": date.strftime("%d/%m/%Y")}
+    
+    trips.append(new_trip)
+    trips_string = json.dumps(trips)
+
     with open("Database/Entity/trips.json", "w") as file:
-        json.dump(trips, file, indent=4)
+        file.write(trips_string)
 
     trip_obj = Trip(user_id, departure_id, destination_id, date)    
     
@@ -34,7 +44,11 @@ def add_trip(user_id, departure_id, destination_id, date):
 
 def modify_trip(user_id, departure_id, destination_id, date, new_trip):
     with open("Database/Entity/trips.json", "r") as file:
-        trips = json.load(file)
+        json_string = file.read()
+        if not json_string: # if file is empty
+            trips = []
+        else:
+            trips = json.loads(json_string)
         for i in trips:
             if i["user_id"] == user_id and i["departure_id"] == departure_id and i["destination_id"] == destination_id and i["date"] == date:
                 i["departure_id"] = new_trip.departure_id
@@ -48,7 +62,11 @@ def modify_trip(user_id, departure_id, destination_id, date, new_trip):
 
 def delete_trip(user_id, departure_id, destination_id, date):
     with open("Database/Entity/trips.json", "r") as file:
-        trips = json.load(file)
+        json_string = file.read()
+        if not json_string: # if file is empty
+            trips = []
+        else:
+            trips = json.loads(json_string)
         for i in trips:
             if i["user_id"] == user_id and i["departure_id"] == departure_id and i["destination_id"] == destination_id and i["date"] == date:
                 trips.remove(i)
