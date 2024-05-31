@@ -1,24 +1,31 @@
 import customtkinter as ctk
-from tkinter import PhotoImage
-from Controller.MapController import get_incoming_trips,get_country_name
+from PIL import Image, ImageTk, ImageSequence
+import tkinter as tk
+
 
 class TripReminder(ctk.CTk):
     def __init__(self):
         super().__init__()
 
         self.title("Trip Reminder")
-        self.geometry("400x600")
-
-        # Set the background color to light blue
-        self.configure(bg="#ADD8E6")
+        self.geometry("400x450")
 
         # Center the window on the screen
         self.center_window()
 
-        # Load and place the reminder symbol
-        self.reminder_symbol = PhotoImage(file="pictures/map_icon.png")  # Make sure this path is correct
-        self.symbol_label = ctk.CTkLabel(self, image=self.reminder_symbol, bg_color="#ADD8E6")
-        self.symbol_label.grid(row=0, column=0, padx=20, pady=10, columnspan=2)
+        # Load the animated GIF using PIL
+        self.bg_image = Image.open("pictures/airplane-travel.gif")
+        self.frames = [ImageTk.PhotoImage(frame.resize((400, 450), Image.LANCZOS)) for frame in
+                       ImageSequence.Iterator(self.bg_image)]
+
+        # Create a canvas to place the background image
+        self.canvas = tk.Canvas(self, width=450, height=450)
+        self.canvas.pack(fill="both", expand=True)
+        self.canvas_image = self.canvas.create_image(0, 0, anchor="nw", image=self.frames[0])
+
+        # Start the animation
+        self.current_frame = 0
+        self.animate()
 
         # Create and place the widgets
         self.create_widgets()
@@ -30,41 +37,41 @@ class TripReminder(ctk.CTk):
 
         # Calculate position x and y coordinates
         x = (screen_width // 2) - (400 // 2)
-        y = (screen_height // 2) - (600 // 2)
+        y = (screen_height // 2) - (450 // 2)
 
-        self.geometry(f'400x600 + {x}+{y}')
+        self.geometry(f'{400}x{450}+{x}+{y}')
+
+    def animate(self):
+        self.current_frame = (self.current_frame + 1) % len(self.frames)
+        self.canvas.itemconfig(self.canvas_image, image=self.frames[self.current_frame])
+        self.after(100, self.animate)  # Adjust the delay as needed for the GIF's frame rate
 
     def create_widgets(self):
-
-        # Label for destination Country
+        # Create labels and entry directly on the canvas
         self.label_country = ctk.CTkLabel(self, text="Destination Country:", bg_color="#ADD8E6")
-        self.label_country.grid(row=1, column=0, padx=20, pady=10)
-        destination_country = get_incoming_trips(self.user_id)
-        self.entry_country = ctk.CTkLabel(self,text= f"{destination_country}")
-        self.entry_country.grid(row=1, column=1, padx=20, pady=10)
+        self.label_country.place(x=50, y=120)
 
-        # Label and entry for departure country
+        # self.entry_country = ctk.CTkLabel(self, text=f"{destination_country}")
+        # self.entry_country.place(x=200, y=120)
+
         self.label_city = ctk.CTkLabel(self, text="Departure Country:", bg_color="#ADD8E6")
-        self.label_city.grid(row=2, column=0, padx=20, pady=10)
-        departure_country = get_country_name(self.country_id)
-        self.entry_city = ctk.CTkLabel(self, text= f"{departure_country}")
-        self.entry_city.grid(row=2, column=1, padx=20, pady=10)
+        self.label_city.place(x=50, y=180)
 
-        # Label and entry for Scheduled Time
+        # self.entry_city = ctk.CTkLabel(self, text=f"{departure_country}")
+        # self.entry_city.place(x=200, y=180)
+
         self.label_time = ctk.CTkLabel(self, text="Scheduled Time:", bg_color="#ADD8E6")
-        self.label_time.grid(row=3, column=0, padx=20, pady=10)
+        self.label_time.place(x=50, y=240)
+
         self.entry_time = ctk.CTkEntry(self)
-        self.entry_time.grid(row=3, column=1, padx=20, pady=10)
+        self.entry_time.place(x=200, y=240)
 
-        # Button to show the entered information
-        self.button_show = ctk.CTkButton(self, text="Fullywared of my DUTY !!!!", command=self.quit)
-        self.button_show.grid(row=4, column=0, columnspan=2, pady=20)
+        self.button_show = ctk.CTkButton(self, text="Fully aware of my DUTY!", command=self.quit)
+        self.button_show.place(x=100, y=300)
 
-        # Label to acknowlage the result
-        self.label_result = ctk.CTkLabel(self, text="ok", bg_color="#ADD8E6")
-        self.label_result.grid(row=5, column=0, columnspan=2, pady=10)
     def quit(self):
         self.destroy()
+
 
 if __name__ == "__main__":
     app = TripReminder()
