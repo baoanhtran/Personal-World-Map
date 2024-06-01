@@ -20,7 +20,7 @@ def get_all_users():
 
     return users
 
-def add_user(username, password, home_country):
+def add_user(username, password):
     with open("Database/Entity/users.json", "r") as file:
         users = json.load(file)
         user_id = len(users) + 1
