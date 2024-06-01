@@ -8,7 +8,7 @@ class Monument:
         self.description = description
 
     def __str__(self):
-        return f"Monument {self.name} in {self.country} is {self.description}."
-    
+        return f"{self.name}\n"
+        
     def __eq__(self, other):
         return self.id == other.id

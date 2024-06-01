@@ -8,27 +8,32 @@ def get_all_trips_by_user_id(user_id):
         data = json.load(file)
         for i in data:
             if i["user_id"] == user_id:
-                date = datetime.strptime(i["date"], "%d/%m/%Y")
-                trip = Trip(i["user_id"], i["departure_id"], i["destination_id"], date)
+                departure_date = datetime.strptime(i["departure_date"], "%d/%m/%Y")
+                # if i["return_date"] == None:
+                #     return_date = None
+                # else:
+                return_date = datetime.strptime(i["return_date"], "%d/%m/%Y")
+                trip = Trip(i["user_id"], i["departure_id"], i["destination_id"], departure_date, return_date)
                 trips.append(trip)
                 
     return trips
 
-def add_trip(user_id, departure_id, destination_id, date):
+def add_trip(user_id, departure_id, destination_id, departure_date, return_date):
     with open("Database/Entity/trips.json", "r") as file:
         trips = json.load(file)
         new_trip = {
             "user_id": user_id,
             "departure_id": departure_id,
             "destination_id": destination_id,
-            "date": date.strftime("%d/%m/%Y")
+            "departure_date": departure_date.strftime("%d/%m/%Y"),
+            "return_date": return_date.strftime("%d/%m/%Y")
         }
         trips.append(new_trip)
         
     with open("Database/Entity/trips.json", "w") as file:
         json.dump(trips, file, indent=4)
 
-    trip_obj = Trip(user_id, departure_id, destination_id, date)    
+    trip_obj = Trip(user_id, departure_id, destination_id, departure_date, return_date)    
     
     return trip_obj
 

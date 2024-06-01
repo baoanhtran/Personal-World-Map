@@ -7,11 +7,11 @@ def login_success(username, password):
             
     return False, None
     
-def register_user(username, password):
+def register_user(username, password, home_country):
     if check_user_existence(username):
         return False, None
 
-    user = add_user(username, password)
+    user = add_user(username, password, home_country)
         
     return True, user
 

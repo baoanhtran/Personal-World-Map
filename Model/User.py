@@ -1,5 +1,3 @@
-import datetime
-
 class User:
     __slots__ = ["id", "username", "password", "carbon_footprint"]
 
@@ -14,9 +12,6 @@ class User:
     
     def __eq__(self, other):
         return self.id == other.id
-    
-    # def add_trip(self, trip):
-    #     self.trips.append(trip)
     
     def add_carbon_footprint(self, carbon_footprint):
         self.carbon_footprint += carbon_footprint

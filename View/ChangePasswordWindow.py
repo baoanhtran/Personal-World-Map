@@ -1,6 +1,7 @@
 import tkinter as tk
 import customtkinter as ctk
 from Controller.LoginController import change_password, get_password
+from tkinter import messagebox
 
 class ChangePasswordWindow(tk.Tk):
     __slots__ = ["label1", "label2", "label3", "username", "password", "button1", "button2", "title1", "canva"]
@@ -78,6 +79,8 @@ class ChangePasswordWindow(tk.Tk):
             # Unbind events before destruction
             self.button1.unbind('<Button-1>')
             self.quit()
+
+            messagebox.showinfo("Success", "Password changed successfully")
     
     def quit(self):
         self.destroy()

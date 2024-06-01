@@ -3,8 +3,10 @@ import customtkinter as ctk
 from PIL import Image
 from tkinter import messagebox
 from Model.Map import Map
+from View.InfoCountryWindow import InfoCountryWindow
+from View.PlanNewTripWindow import PlanNewTripWindow
 from CustomWidget.ZoomableCanvas import ZoomableCanvas
-from Controller.MapController import get_country_name, get_incoming_trips, get_all_countries_visited, get_description
+from Controller.MapController import get_country_name, get_incoming_trips, get_all_countries_visited
 from datetime import datetime
 
 class MapWindow(tk.Tk):
@@ -48,6 +50,7 @@ class MapWindow(tk.Tk):
 
         # Button to plan a new trip
         self.button2 = ctk.CTkButton(self.side_bar, text="Plan a new trip", text_color="#f5f6f9", fg_color= "transparent", font=("Arial", 15, "bold"), hover_color = "#e2eafc",border_color = "#f5f6f9", corner_radius= 32, height=2, image = ctk.CTkImage(dark_image=icon3, light_image=icon3))
+        self.button2.bind("<Button-1>", self.plan_new_trip)
         self.button2.pack(side="top", pady=10, padx=10)
 
         # Button to change password
@@ -82,27 +85,24 @@ class MapWindow(tk.Tk):
         visited_countries = get_all_countries_visited(self.user.id)
         self.canevas.delete("all")
         for (k, v) in self.map.coordinates_dict.items():
+            if k in visited_countries:
+                color_shape = "#eb4934"
+            else:
+                color_shape = "#f5f6f9"
+                
             if self.map.list_depth(v) == 4:
                 for ele in v:
                     for ele2 in ele:
-                        if k in visited_countries:
-                            poly = self.canevas.create_polygon(ele2, fill="#eb4934", outline='#eb4934')
-                            self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
-                        else:
-                            poly = self.canevas.create_polygon(ele2, fill="#f5f6f9", outline='#354f52')
-                            self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
+                        poly = self.canevas.create_polygon(ele2, fill=color_shape, outline="#354f52")
+                        self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
             elif self.map.list_depth(v) == 3:
                 for ele in v:
-                    if k in visited_countries:
-                        poly = self.canevas.create_polygon(ele, fill="#eb4934", outline='#eb4934')
-                        self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
-                    else:
-                        poly = self.canevas.create_polygon(ele, fill="#f5f6f9", outline='#354f52')
-                        self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
-
+                    poly = self.canevas.create_polygon(ele, fill=color_shape, outline="#354f52")
+                    self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
 
     def show_country(self, country):
-        messagebox.showinfo(country, get_description(country))
+        # messagebox.showinfo(country, get_description(country))
+        InfoCountryWindow(self.user, country)
 
     def show_reminders(self):
         reminders = get_incoming_trips(self.user.id)
@@ -111,13 +111,16 @@ class MapWindow(tk.Tk):
             for reminder in reminders:
                 departure = get_country_name(reminder.departure_id)
                 destination = get_country_name(reminder.destination_id)
-                date = datetime.strftime(reminder.date, "%d/%m/%Y")
+                date = datetime.strftime(reminder.departure_date, "%d/%m/%Y")
                 today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-                if (reminder.date - today).days == 0:
+                if (reminder.departure_date - today).days == 0:
                     message += f"You have a trip from {departure} to {destination} today.\n"
                 else:
                     message += f"You have a trip from {departure} to {destination} on {date}.\n"
             messagebox.showinfo("Reminders", message)
+
+    def plan_new_trip(self, event):
+        PlanNewTripWindow(self.user, None)
 
     def change_password(self, event):
         from View.ChangePasswordWindow import ChangePasswordWindow
