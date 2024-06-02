@@ -1,12 +1,13 @@
 import customtkinter as ctk
 from PIL import Image, ImageTk, ImageSequence
 import tkinter as tk
-
+from Controller.TripController import get_all_upcoming_trips
+from Controller.MapController import get_country_name
 
 class TripReminder(ctk.CTk):
-    def __init__(self):
+    def __init__(self,user):
         super().__init__()
-
+        self.user = user
         self.title("Trip Reminder")
         self.geometry("400x450")
 
@@ -52,14 +53,19 @@ class TripReminder(ctk.CTk):
         self.label_country = ctk.CTkLabel(self, text="Destination Country:", bg_color="#ADD8E6")
         self.label_country.place(x=50, y=120)
 
-        # self.entry_country = ctk.CTkLabel(self, text=f"{destination_country}")
-        # self.entry_country.place(x=200, y=120)
+        upcoming_trips = get_all_upcoming_trips(self.user.id)
+        for trip in upcoming_trips:
+            departure = get_country_name(trip.departure_id)
+            destination = get_country_name(trip.destination_id)
+
+        self.entry_country = ctk.CTkLabel(self, text=f"{destination}")
+        self.entry_country.place(x=200, y=120)
 
         self.label_city = ctk.CTkLabel(self, text="Departure Country:", bg_color="#ADD8E6")
         self.label_city.place(x=50, y=180)
 
-        # self.entry_city = ctk.CTkLabel(self, text=f"{departure_country}")
-        # self.entry_city.place(x=200, y=180)
+        self.entry_city = ctk.CTkLabel(self, text=f"{departure}")
+        self.entry_city.place(x=200, y=180)
 
         self.label_time = ctk.CTkLabel(self, text="Scheduled Time:", bg_color="#ADD8E6")
         self.label_time.place(x=50, y=240)
@@ -76,4 +82,3 @@ class TripReminder(ctk.CTk):
 
 if __name__ == "__main__":
     app = TripReminder()
-    app.mainloop()
