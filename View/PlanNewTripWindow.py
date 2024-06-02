@@ -1,5 +1,6 @@
 import tkinter as tk
 import customtkinter as ctk
+from tkinter import ttk 
 from tkcalendar import DateEntry
 from Controller.TripController import add_new_trip
 from Controller.CountryController import get_country_id, get_all_countries_name
@@ -31,7 +32,7 @@ class PlanNewTripWindow(tk.Tk):
         self.label1.pack(padx= 10, pady= 10)
 
         # Combo box for the departure country
-        self.departure_country = ctk.CTkComboBox(self, font = ("Arial", 11, 'bold'), width= 150, height = 20, text_color = '#354f52', values = self.list_countries, dropdown_fg_color="#f5f6f9", dropdown_text_color='#354f52')
+        self.departure_country = ttk.Combobox(self, font = ("Arial", 11, 'bold'), values = self.list_countries)
         self.departure_country.pack(padx= 10, pady= 10)
         self.departure_country.configure(state="readonly")
         self.departure_country.set("")
@@ -41,7 +42,7 @@ class PlanNewTripWindow(tk.Tk):
         self.label2.pack(padx= 10, pady= 10)
 
         # Combo box for the destination country
-        self.destination_country = ctk.CTkComboBox(self, font=("Arial", 11, 'bold'), width=150, height=20, text_color='#354f52', values=self.list_countries, dropdown_fg_color="#f5f6f9", dropdown_text_color='#354f52')
+        self.destination_country = ttk.Combobox(self, font=("Arial", 11, 'bold'), values=self.list_countries)
         self.destination_country.pack(padx=10, pady=10)
         self.destination_country.configure(state="readonly")
         self.destination_country.set("")
@@ -71,6 +72,7 @@ class PlanNewTripWindow(tk.Tk):
         self.button1 = ctk.CTkButton(self, text = "Save your trip", font = ("Arial", 11, 'bold'), width = 200, height = 30, fg_color= '#354f52', corner_radius = 10)
         self.button1.pack(padx= 10, pady= 10)
         self.button1.bind("<Button-1>", self.save_new_trip)
+
         self.mainloop()
 
     def save_new_trip(self, event):

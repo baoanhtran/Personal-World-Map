@@ -94,14 +94,13 @@ class MapWindow(tk.Tk):
                 for ele in v:
                     for ele2 in ele:
                         poly = self.canevas.create_polygon(ele2, fill=color_shape, outline="#354f52")
-                        self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
+                        self.canevas.tag_bind(poly, "<Double-Button-1>", lambda event, name=k: self.show_country(name))
             elif self.map.list_depth(v) == 3:
                 for ele in v:
                     poly = self.canevas.create_polygon(ele, fill=color_shape, outline="#354f52")
-                    self.canevas.tag_bind(poly, "<Button-1>", lambda event, name=k: self.show_country(name))
+                    self.canevas.tag_bind(poly, "<Double-Button-1>", lambda event, name=k: self.show_country(name))
 
     def show_country(self, country):
-        # messagebox.showinfo(country, get_description(country))
         InfoCountryWindow(self.user, country)
 
     def show_reminders(self):
