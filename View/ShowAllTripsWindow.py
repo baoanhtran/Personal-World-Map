@@ -5,6 +5,9 @@ from tkinter import messagebox
 from Controller.TripController import get_all_past_trips, get_all_upcoming_trips, delete_planned_trip
 from Controller.MapController import get_country_name
 from Controller.CountryController import get_country_id
+from View.UpdateTripWindow import UpdateTripWindow
+from Model.Trip import Trip
+from datetime import datetime
 
 class ShowAllTripsWindow(tk.Tk):
     def __init__(self, user):
@@ -100,9 +103,11 @@ class ShowAllTripsWindow(tk.Tk):
         selected_item = self.upcoming_tree.selection()
         if selected_item:
             departure, destination, departure_date, return_date = self.upcoming_tree.item(selected_item)["values"]
-            print(departure, destination, departure_date, return_date)
-            # Open the modify trip window
-            # ModifyTripWindow(self.user, departure, destination, departure_date, return_date)
+            departure_date = datetime.strptime(departure_date, "%d/%m/%Y")
+            return_date = datetime.strptime(return_date, "%d/%m/%Y")
+            trip = Trip(self.user.id, get_country_id(departure), get_country_id(destination), departure_date, return_date)
+            self.destroy()
+            UpdateTripWindow(self.user, trip)
         else:
             messagebox.showerror("Error", "Please select a trip to modify")
             self.lift()
@@ -121,10 +126,9 @@ class ShowAllTripsWindow(tk.Tk):
             is_deleted = delete_planned_trip(self.user.id, departure_id, destination_id, departure_date, return_date)
             if is_deleted:
                 messagebox.showinfo("Success", "The trip has been deleted")
-            
-            # Refresh the window
-            self.destroy()
-            ShowAllTripsWindow(self.user)
+                # Refresh the window
+                self.destroy()
+                ShowAllTripsWindow(self.user)
         else:
             messagebox.showerror("Error", "Please select a trip to delete")
             self.lift()

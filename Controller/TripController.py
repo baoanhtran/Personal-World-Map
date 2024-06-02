@@ -13,17 +13,22 @@ def add_new_trip(user_id, departure_id, destination_id, departure_date, return_d
             
     return add_trip(user_id, departure_id, destination_id, departure_date, return_date)
 
-def update_planned_trip(user_id, departure_id, destination_id, departure_date, return_date, new_trip):
+def update_planned_trip(old_trip, new_departure_id, new_destination_id, new_departure_date, new_return_date):
     # Check if the departure date, return date have conflict with other trips
-    all_trips = get_all_trips_by_user_id(user_id)
+    all_trips = get_all_upcoming_trips(old_trip.user_id)
+    # Remove the old trip from the list of all trips
     for trip in all_trips:
-        if (new_trip.departure_date >= trip.departure_date and new_trip.departure_date <= trip.return_date) \
-            or (new_trip.return_date >= trip.departure_date and new_trip.return_date <= trip.return_date) \
-            or (new_trip.departure_date <= trip.departure_date and new_trip.return_date >= trip.return_date):
+        if trip.departure_id == old_trip.departure_id and trip.destination_id == old_trip.destination_id and trip.departure_date == old_trip.departure_date and trip.return_date == old_trip.return_date:
+            all_trips.remove(trip)
+            break
+    for trip in all_trips:
+        if (new_departure_date >= trip.departure_date and new_departure_date <= trip.return_date) \
+            or (new_return_date >= trip.departure_date and new_return_date <= trip.return_date) \
+            or (new_departure_date <= trip.departure_date and new_return_date >= trip.return_date):
 
             return False
         
-    return modify_trip(user_id, departure_id, destination_id, departure_date, return_date, new_trip)
+    return modify_trip(old_trip, new_departure_id, new_destination_id, new_departure_date, new_return_date)
 
 def delete_planned_trip(user_id, departure_id, destination_id, departure_date, return_date):
     return delete_trip(user_id, departure_id, destination_id, departure_date, return_date)
@@ -50,6 +55,6 @@ def get_all_upcoming_trips(user_id):
             upcoming_trips.append(trip)
 
     # Sort the list of upcoming trips by departure date
-    upcoming_trips.sort(key=lambda x: x.departure_date, reverse=True) # Reverse the list to have the most recent trip first
+    upcoming_trips.sort(key=lambda x: x.departure_date, reverse=False)
             
     return upcoming_trips
