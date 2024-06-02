@@ -14,7 +14,7 @@ class TripReminder(ctk.CTk):
         self.center_window()
 
         # Load the animated GIF using PIL
-        self.bg_image = Image.open("pictures/airplane-travel.gif")
+        self.bg_image = Image.open("View/pictures/airplane-travel.gif")
         self.frames = [ImageTk.PhotoImage(frame.resize((400, 450), Image.LANCZOS)) for frame in
                        ImageSequence.Iterator(self.bg_image)]
 
@@ -30,6 +30,7 @@ class TripReminder(ctk.CTk):
         # Create and place the widgets
         self.create_widgets()
 
+        self.mainloop()
     def center_window(self):
         # Get the screen width and height
         screen_width = self.winfo_screenwidth()
@@ -44,7 +45,7 @@ class TripReminder(ctk.CTk):
     def animate(self):
         self.current_frame = (self.current_frame + 1) % len(self.frames)
         self.canvas.itemconfig(self.canvas_image, image=self.frames[self.current_frame])
-        self.after(100, self.animate)  # Adjust the delay as needed for the GIF's frame rate
+        self.after(30, self.animate)  # Adjust the delay as needed for the GIF's frame rate
 
     def create_widgets(self):
         # Create labels and entry directly on the canvas
@@ -66,7 +67,7 @@ class TripReminder(ctk.CTk):
         self.entry_time = ctk.CTkEntry(self)
         self.entry_time.place(x=200, y=240)
 
-        self.button_show = ctk.CTkButton(self, text="Fully aware of my DUTY!", command=self.quit)
+        self.button_show = ctk.CTkButton(self, text="Fully awared of my DUTY!", command=self.quit)
         self.button_show.place(x=100, y=300)
 
     def quit(self):
