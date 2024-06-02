@@ -6,6 +6,9 @@ def get_all_countries_name():
     for country in get_list_of_countries():
         country_names.append(country.name)
 
+    # Sort the list of countries
+    country_names.sort()
+
     return country_names
 
 def get_country_id(country_name):

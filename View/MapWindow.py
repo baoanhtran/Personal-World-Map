@@ -110,12 +110,13 @@ class MapWindow(tk.Tk):
             for reminder in reminders:
                 departure = get_country_name(reminder.departure_id)
                 destination = get_country_name(reminder.destination_id)
-                date = datetime.strftime(reminder.departure_date, "%d/%m/%Y")
+                departure_date = datetime.strftime(reminder.departure_date, "%d/%m/%Y")
+                return_date = datetime.strftime(reminder.return_date, "%d/%m/%Y")
                 today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
                 if (reminder.departure_date - today).days == 0:
-                    message += f"You have a trip from {departure} to {destination} today.\n"
+                    message += f"You have a trip from {departure} to {destination} today and you will return on {return_date}.\n"
                 else:
-                    message += f"You have a trip from {departure} to {destination} on {date}.\n"
+                    message += f"You have a trip from {departure} to {destination} on {departure_date} and you will return on {return_date}.\n"
             messagebox.showinfo("Reminders", message)
 
     def plan_new_trip(self, event):
