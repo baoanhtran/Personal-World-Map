@@ -41,6 +41,7 @@ class SignUpWindow(tk.Tk):
         self.button1 = ctk.CTkButton(self, text = "Create a new Account", font = ("Arial", 11, 'bold'), width = 200, height = 30, fg_color= '#354f52', corner_radius = 10)
         self.button1.place(x = 150, y = 300)
         self.button1.bind('<Button-1>', self.new_account)
+        self.bind('<Return>', self.new_account)
 
         self.mainloop()
 

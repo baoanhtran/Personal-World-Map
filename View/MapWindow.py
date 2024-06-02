@@ -5,6 +5,7 @@ from tkinter import messagebox
 from Model.Map import Map
 from View.InfoCountryWindow import InfoCountryWindow
 from View.PlanNewTripWindow import PlanNewTripWindow
+from View.ShowAllTripsWindow import ShowAllTripsWindow
 from CustomWidget.ZoomableCanvas import ZoomableCanvas
 from Controller.MapController import get_country_name, get_incoming_trips, get_all_countries_visited
 from datetime import datetime
@@ -46,6 +47,7 @@ class MapWindow(tk.Tk):
 
         # Button to show all trips
         self.button1 = ctk.CTkButton(self.side_bar, text="Show all my trips", text_color="#f5f6f9", fg_color= "transparent", border_color = "#f5f6f9", hover_color = "#e2eafc", corner_radius= 32,   font=("Arial", 15, "bold") ,height=2, image = ctk.CTkImage(dark_image=icon2, light_image=icon2))
+        self.button1.bind("<Button-1>", self.show_all_trips)
         self.button1.pack(side="top", pady=10, padx=10)
 
         # Button to plan a new trip
@@ -118,6 +120,9 @@ class MapWindow(tk.Tk):
                 else:
                     message += f"You have a trip from {departure} to {destination} on {departure_date} and you will return on {return_date}.\n"
             messagebox.showinfo("Reminders", message)
+
+    def show_all_trips(self, event):
+        ShowAllTripsWindow(self.user)
 
     def plan_new_trip(self, event):
         PlanNewTripWindow(self.user, None)

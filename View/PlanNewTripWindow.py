@@ -121,9 +121,18 @@ class PlanNewTripWindow(tk.Tk):
         else:
             departure_id = get_country_id(departure_country)
             destination_id = get_country_id(destination_country)
-            add_new_trip(self.user.id, departure_id, destination_id, departure_date, return_date)
-            messagebox.showinfo("Success", "Trip added successfully")
+            is_added = add_new_trip(self.user.id, departure_id, destination_id, departure_date, return_date)
+            if not is_added:
+                if hasattr(self, "label4"):
+                    self.label4.destroy()
 
-            # Unbind events before destruction
-            self.button1.unbind('<Button-1>')
-            self.after(100, self.destroy)
+                self.label4 = ctk.CTkLabel(self, text="This trip conflicts with another trip", text_color='#eb4934', fg_color= "#f5f6f9", corner_radius= 32,   font=("Arial", 11, "bold") ,height=2)
+                self.label4.pack(padx= 10, pady= 10)
+            else:
+                # Unbind events before destruction
+                self.button1.unbind('<Button-1>')
+                self.after(100, self.destroy)
+
+                messagebox.showinfo("Success", "Trip added successfully")
+
+            
