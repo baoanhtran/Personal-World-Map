@@ -12,3 +12,9 @@ class Trip:
         """
         Calculate the distance between the departure and the destination
         """
+
+    def __eq__(self, value: object) -> bool:
+        if not isinstance(value, Trip):
+            return False
+
+        return self.user_id == value.user_id and self.departure_id == value.departure_id and self.destination_id == value.destination_id and self.departure_date == value.departure_date and self.return_date == value.return_date

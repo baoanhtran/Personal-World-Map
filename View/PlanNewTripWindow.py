@@ -3,8 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from tkcalendar import DateEntry
 from datetime import datetime
-from Controller.TripController import add_new_trip
-from Controller.CountryController import get_country_id, get_all_countries_name
+from Controller.TripController import add_new_trip, get_all_countries_without_chosen
 
 class PlanNewTripWindow(tk.Toplevel):
     __slots__ = ["user", "country_destination", "return_date", "departure_date", "list_countries"]
@@ -14,9 +13,7 @@ class PlanNewTripWindow(tk.Toplevel):
         self.master = master
         self.user = master.user
         self.country_destination = country_destination
-        self.list_countries = get_all_countries_name()
-        if country_destination is not None:
-            self.list_countries.remove(country_destination)
+        self.list_countries = get_all_countries_without_chosen(country_destination)
         self.resizable(False, False)
         self.title("Plan a new trip")
 
@@ -93,25 +90,11 @@ class PlanNewTripWindow(tk.Toplevel):
         departure_date = datetime.strptime(departure_date, "%Y-%m-%d")
         return_date = datetime.strptime(return_date, "%Y-%m-%d")
         
-        if departure_country == "" or destination_country == "":
-            messagebox.showerror("Error", "Please type all fields")
-            self.lift() 
-        elif departure_country == destination_country:
-            messagebox.showerror("Error", "Departure and destination countries must be different")
-            self.lift() 
-        elif return_date <= departure_date:
-            messagebox.showerror("Error", "Return date must be after departure date")
-            self.lift() 
-        elif departure_date < datetime.now().replace(hour=0, minute=0, second=0, microsecond=0):
-            messagebox.showerror("Error", "Departure date must be in the future")
+        is_valid, message = add_new_trip(self.user.id, departure_country, destination_country, departure_date, return_date)
+
+        if not is_valid:
+            messagebox.showerror("Error", message)
             self.lift() 
         else:
-            departure_id = get_country_id(departure_country)
-            destination_id = get_country_id(destination_country)
-            is_added = add_new_trip(self.user.id, departure_id, destination_id, departure_date, return_date)
-            if not is_added:
-                messagebox.showerror("Error", "This trip conflicts with another trip")
-                self.lift() 
-            else:
-                messagebox.showinfo("Success", "Trip added successfully")
-                self.destroy()
+            self.destroy()
+            messagebox.showinfo("Success", message)

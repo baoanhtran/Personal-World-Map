@@ -1,6 +1,6 @@
 import tkinter as tk
 import customtkinter as ctk
-from Controller.LoginController import change_password, get_password
+from Controller.LoginController import change_password
 from tkinter import messagebox
 
 class ChangePasswordWindow(tk.Toplevel):
@@ -42,6 +42,7 @@ class ChangePasswordWindow(tk.Toplevel):
         self.button1 = ctk.CTkButton(self, text = "Change", font = ("Arial", 11, 'bold'), width = 200, height = 30, fg_color= '#354f52', corner_radius = 10)
         self.button1.place(x = 150, y = 300)
         self.button1.bind('<Button-1>', self.change_password)
+        self.bind('<Return>', self.change_password)
 
         self.mainloop()
 
@@ -49,37 +50,18 @@ class ChangePasswordWindow(tk.Toplevel):
         new_password = self.new_password.get().strip()
         password_confirmation = self.confirmation_of_password.get().strip()
 
-        if new_password == "" or password_confirmation == "":
-            # If error message already exists, destroy it
+        is_valid, message = change_password(self.user.id, new_password, password_confirmation)
+
+        if not is_valid:
             if hasattr(self, "label3"):
                 self.label3.destroy()
 
-            # Label for error message
-            self.label3 = ctk.CTkLabel(self, text = "Please type all fields", font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
+            self.label3 = ctk.CTkLabel(self, text = message, font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
             self.label3.place(x = 50, y = 400)
-        elif new_password != password_confirmation:
-            # If error message already exists, destroy it
-            if hasattr(self, "label3"):
-                self.label3.destroy()
-
-            # Label for error message
-            self.label3 = ctk.CTkLabel(self, text = "Passwords do not match", font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
-            self.label3.place(x = 50, y = 400)
-        elif new_password == get_password(self.user.id):
-            # If error message already exists, destroy it
-            if hasattr(self, "label3"):
-                self.label3.destroy()
-
-            # Label for error message
-            self.label3 = ctk.CTkLabel(self, text = "New password is the same as the old one", font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
-            self.label3.place(x = 50, y = 400)
-        else :
-            change_password(self.user.id, new_password)
-
-            # Unbind events before destruction
+        else:
             self.button1.unbind('<Button-1>')
+            self.unbind('<Return>')
             self.quit()
-
             messagebox.showinfo("Success", "Password changed successfully")
     
     def quit(self):

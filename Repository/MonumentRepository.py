@@ -20,9 +20,3 @@ def get_list_of_monuments_by_country_id(country_id):
                 
         return monuments_list
     
-def get_despcriptions_monuments_by_country_id(country_id):
-    monuments_list = get_list_of_monuments_by_country_id(country_id)
-    text = "\n\n"
-    for monument in monuments_list:
-        text += monument.__str__() + "\n"
-    return text   

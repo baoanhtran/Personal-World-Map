@@ -18,6 +18,7 @@ class MapWindow(tk.Tk):
         self.user = user
         self.attributes("-fullscreen", True)
         self.title("Personal World Map")
+        self.current_info_window = False  # Initialize the current_info_window attribute
 
         # ICONS
         icon1 = tk.PhotoImage(file="View/pictures/map_icon.png")
@@ -104,13 +105,11 @@ class MapWindow(tk.Tk):
 
     def show_country(self, country):
         InfoCountryWindow(self, country)
-
+        
     def show_reminders(self):
         reminders = get_incoming_trips(self.user.id)
         if len(reminders) > 0:
             TripReminderWindow(self, reminders)
-
-
             
     def show_all_trips(self, event):
         ShowAllTripsWindow(self)

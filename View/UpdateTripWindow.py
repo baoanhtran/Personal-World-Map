@@ -4,9 +4,7 @@ from tkinter import messagebox
 import customtkinter as ctk
 from datetime import datetime
 from tkcalendar import DateEntry
-from Controller.TripController import update_planned_trip
-from Controller.CountryController import get_country_id, get_all_countries_name
-from Controller.MapController import get_country_name
+from Controller.TripController import update_planned_trip, get_all_countries_without_chosen, get_country_name
 
 class UpdateTripWindow(tk.Toplevel):
     def __init__(self, master, trip):
@@ -19,7 +17,7 @@ class UpdateTripWindow(tk.Toplevel):
         self.resizable(False, False)
         self.config(bg = "#f5f6f9")
 
-        self.list_countries = get_all_countries_name()
+        self.list_countries = get_all_countries_without_chosen(None)
         
         # Load the background image
         self.background_image = tk.PhotoImage(file="View/pictures/bg_map.png")
@@ -94,30 +92,16 @@ class UpdateTripWindow(tk.Toplevel):
         # Convert the date to a datetime object
         departure_date = datetime.strptime(departure_date, "%Y-%m-%d")
         return_date = datetime.strptime(return_date, "%Y-%m-%d")
-        
-        if departure_country == "" or destination_country == "":
-            messagebox.showerror("Error", "Please type all fields")
-            self.lift() 
-        elif departure_country == destination_country:
-            messagebox.showerror("Error", "Departure and destination countries must be different")
-            self.lift() 
-        elif return_date <= departure_date:
-            messagebox.showerror("Error", "Return date must be after departure date")
-            self.lift() 
-        elif departure_date < datetime.now().replace(hour=0, minute=0, second=0, microsecond=0):
-            messagebox.showerror("Error", "Departure date must be in the future")
-            self.lift() 
-        else:
-            departure_id = get_country_id(departure_country)
-            destination_id = get_country_id(destination_country)
-            is_added = update_planned_trip(self.trip, departure_id, destination_id, departure_date, return_date)
-            if not is_added:
-                messagebox.showerror("Error", "This trip conflicts with another trip")
-                self.lift() 
-            else:
-                messagebox.showinfo("Success", "Trip added successfully")
-                self.destroy()
 
-                # Refresh the window
-                from View.ShowAllTripsWindow import ShowAllTripsWindow
-                ShowAllTripsWindow(self)
+        is_valid, message = update_planned_trip(self.trip, departure_country, destination_country, departure_date, return_date)
+
+        if not is_valid:
+            messagebox.showerror("Error", message)
+            self.lift()
+        else:
+            messagebox.showinfo("Success", message)
+            self.destroy()
+
+            # Refresh the window
+            from View.ShowAllTripsWindow import ShowAllTripsWindow
+            ShowAllTripsWindow(self.master)

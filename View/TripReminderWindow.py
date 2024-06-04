@@ -2,7 +2,7 @@ import customtkinter as ctk
 from PIL import Image, ImageTk, ImageSequence
 import tkinter as tk
 from tkinter import ttk
-from Controller.MapController import get_country_name
+from Controller.TripController import get_country_name
 from datetime import datetime
 
 class TripReminderWindow(tk.Toplevel):

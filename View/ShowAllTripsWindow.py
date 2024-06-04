@@ -2,9 +2,7 @@ import tkinter as tk
 import customtkinter as ctk
 from tkinter import ttk
 from tkinter import messagebox
-from Controller.TripController import get_all_past_trips, get_all_upcoming_trips, delete_planned_trip
-from Controller.MapController import get_country_name
-from Controller.CountryController import get_country_id
+from Controller.TripController import get_all_past_trips, get_all_upcoming_trips, delete_planned_trip, get_country_name, get_country_id
 from View.UpdateTripWindow import UpdateTripWindow
 from Model.Trip import Trip
 from datetime import datetime
@@ -113,7 +111,7 @@ class ShowAllTripsWindow(tk.Toplevel):
             messagebox.showerror("Error", "Please select a trip to modify")
             self.lift() 
 
-    def delete_trip(self, trip):
+    def delete_trip(self, event):
         # Get the values of the selected item
         selected_item = self.upcoming_tree.selection()
         if selected_item:
@@ -122,9 +120,7 @@ class ShowAllTripsWindow(tk.Toplevel):
                 return
             
             # Delete the trip
-            departure_id = get_country_id(departure)
-            destination_id = get_country_id(destination)
-            is_deleted = delete_planned_trip(self.user.id, departure_id, destination_id, departure_date, return_date)
+            is_deleted = delete_planned_trip(self.user.id, departure, destination, departure_date, return_date)
             if is_deleted:
                 messagebox.showinfo("Success", "The trip has been deleted")
                 # Refresh the window
@@ -133,6 +129,3 @@ class ShowAllTripsWindow(tk.Toplevel):
         else:
             messagebox.showerror("Error", "Please select a trip to delete")
             self.lift()
-
-    def quit(self, event):
-        self.destroy()

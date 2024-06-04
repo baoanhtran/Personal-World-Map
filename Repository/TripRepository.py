@@ -29,8 +29,6 @@ def add_trip(user_id, departure_id, destination_id, departure_date, return_date)
         
     with open("Database/Entity/trips.json", "w") as file:
         json.dump(trips, file, indent=4)
-
-    # trip_obj = Trip(user_id, departure_id, destination_id, departure_date, return_date)    
     
     return True
 

@@ -22,9 +22,16 @@
     },
     {
         "user_id": 1,
-        "departure_id": 26,
+        "departure_id": 166,
         "destination_id": 116,
-        "departure_date": "07/06/2024",
-        "return_date": "08/06/2024"
+        "departure_date": "28/06/2024",
+        "return_date": "03/07/2024"
+    },
+    {
+        "user_id": 6,
+        "departure_id": 73,
+        "destination_id": 56,
+        "departure_date": "04/06/2024",
+        "return_date": "05/06/2024"
     }
 ]

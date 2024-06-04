@@ -1,6 +1,6 @@
 import tkinter as tk
 import customtkinter as ctk
-from Controller.CountryController import get_description, get_country_id, get_despcriptions_monuments
+from Controller.MapController import get_description, get_despcriptions_monuments
 from View.PlanNewTripWindow import PlanNewTripWindow
 
 
@@ -16,8 +16,7 @@ class InfoCountryWindow(tk.Toplevel): # ENORA
         self.resizable(False, False)
         self.title("Plan a new trip")
         self.config(bg = "#f5f6f9")
-        self.country_id = get_country_id(country_destination)
-        string_monuments = get_despcriptions_monuments(self.country_id)
+        string_monuments = get_despcriptions_monuments(self.country_destination)
 
         # Title
         self.title1 = ctk.CTkLabel(self, text=f'{self.country_destination}', text_color='#354f52', fg_color= "#f5f6f9", corner_radius= 32,   font=("Impact", 25, "bold") ,height=2)
@@ -50,4 +49,6 @@ class InfoCountryWindow(tk.Toplevel): # ENORA
     def open_plan_new_trip(self):
         self.destroy()
         PlanNewTripWindow(self, self.country_destination)
-        
+
+    def quit(self):
+        self.destroy()
