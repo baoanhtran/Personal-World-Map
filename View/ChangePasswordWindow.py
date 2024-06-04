@@ -3,23 +3,23 @@ import customtkinter as ctk
 from Controller.LoginController import change_password, get_password
 from tkinter import messagebox
 
-class ChangePasswordWindow(tk.Tk):
+class ChangePasswordWindow(tk.Toplevel):
     __slots__ = ["label1", "label2", "label3", "username", "password", "button1", "button2", "title1", "canva"]
 
-    def __init__(self, user):
+    def __init__(self, master):
         ctk.set_appearance_mode("light")
 
         super().__init__()
-        self.user = user
+        self.master = master
+        self.user = master.user
         self.title("Your personal travel map")
-        self.geometry("500x500")
         self.resizable(False, False)
 
         # Apply custom color theme
-        self.canva = ctk.CTkCanvas(width=500, height=500)
-        self.canva.pack()
+        self.canva = tk.Canvas(self, width=500, height=500)
+        self.canva.pack(fill="both", expand=True)
 
-        # Load the .gif image file.
+        # Load the image file.
         self.img1 = tk.PhotoImage(file="View/pictures/bg_map.png")
         self.canva.create_image(0, 0, image=self.img1, anchor="nw")
 

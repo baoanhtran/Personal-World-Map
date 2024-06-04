@@ -6,9 +6,9 @@ from Model.Map import Map
 from View.InfoCountryWindow import InfoCountryWindow
 from View.PlanNewTripWindow import PlanNewTripWindow
 from View.ShowAllTripsWindow import ShowAllTripsWindow
+from View.TripReminderWindow import TripReminderWindow
 from CustomWidget.ZoomableCanvas import ZoomableCanvas
-from Controller.MapController import get_country_name, get_incoming_trips, get_all_countries_visited
-from datetime import datetime
+from Controller.MapController import get_incoming_trips, get_all_countries_visited
 
 class MapWindow(tk.Tk):
     __slots__ = ["canevas", "map", "canva"]
@@ -76,7 +76,7 @@ class MapWindow(tk.Tk):
         self.canevas.pack(side="left")
 
         # Reminders
-        self.show_reminders()
+        self.after(500, self.show_reminders)
 
         self.mainloop()
 
@@ -103,33 +103,24 @@ class MapWindow(tk.Tk):
                     self.canevas.tag_bind(poly, "<Double-Button-1>", lambda event, name=k: self.show_country(name))
 
     def show_country(self, country):
-        InfoCountryWindow(self.user, country)
+        InfoCountryWindow(self, country)
 
     def show_reminders(self):
         reminders = get_incoming_trips(self.user.id)
         if len(reminders) > 0:
-            message = f"Hi {self.user.username} !\n"
-            for reminder in reminders:
-                departure = get_country_name(reminder.departure_id)
-                destination = get_country_name(reminder.destination_id)
-                departure_date = datetime.strftime(reminder.departure_date, "%d/%m/%Y")
-                return_date = datetime.strftime(reminder.return_date, "%d/%m/%Y")
-                today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-                if (reminder.departure_date - today).days == 0:
-                    message += f"You have a trip from {departure} to {destination} today and you will return on {return_date}.\n"
-                else:
-                    message += f"You have a trip from {departure} to {destination} on {departure_date} and you will return on {return_date}.\n"
-            messagebox.showinfo("Reminders", message)
+            TripReminderWindow(self, reminders)
 
+
+            
     def show_all_trips(self, event):
-        ShowAllTripsWindow(self.user)
+        ShowAllTripsWindow(self)
 
     def plan_new_trip(self, event):
-        PlanNewTripWindow(self.user, None)
+        PlanNewTripWindow(self, None)
 
     def change_password(self, event):
         from View.ChangePasswordWindow import ChangePasswordWindow
-        ChangePasswordWindow(self.user)
+        ChangePasswordWindow(self)
 
     def sign_out(self):
         if not messagebox.askokcancel("Sign out", "Are you sure you want to sign out ?"):

@@ -4,14 +4,14 @@ from Controller.CountryController import get_description, get_country_id, get_de
 from View.PlanNewTripWindow import PlanNewTripWindow
 
 
-class InfoCountryWindow(tk.Tk): # ENORA
+class InfoCountryWindow(tk.Toplevel): # ENORA
     __slots__ = ["user", "country_destination"]
 
-    def __init__(self, user, country_destination):
+    def __init__(self, master, country_destination):
         super().__init__()
-
+        self.master = master
         self.country_destination = country_destination
-        self.user = user
+        self.user = master.user
         self.geometry("500x600")
         self.resizable(False, False)
         self.title("Plan a new trip")
@@ -49,5 +49,5 @@ class InfoCountryWindow(tk.Tk): # ENORA
 
     def open_plan_new_trip(self):
         self.destroy()
-        PlanNewTripWindow(self.user, self.country_destination)
+        PlanNewTripWindow(self, self.country_destination)
         

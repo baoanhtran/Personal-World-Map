@@ -9,12 +9,13 @@ from View.UpdateTripWindow import UpdateTripWindow
 from Model.Trip import Trip
 from datetime import datetime
 
-class ShowAllTripsWindow(tk.Tk):
-    def __init__(self, user):
+class ShowAllTripsWindow(tk.Toplevel):
+    def __init__(self, master):
         ctk.set_appearance_mode("light")
 
         super().__init__()
-        self.user = user
+        self.master = master
+        self.user = master.user
         self.title("All my trips")
         self.resizable(False, False)
 
@@ -107,10 +108,10 @@ class ShowAllTripsWindow(tk.Tk):
             return_date = datetime.strptime(return_date, "%d/%m/%Y")
             trip = Trip(self.user.id, get_country_id(departure), get_country_id(destination), departure_date, return_date)
             self.destroy()
-            UpdateTripWindow(self.user, trip)
+            UpdateTripWindow(self, trip)
         else:
             messagebox.showerror("Error", "Please select a trip to modify")
-            self.lift()
+            self.lift() 
 
     def delete_trip(self, trip):
         # Get the values of the selected item
@@ -128,7 +129,7 @@ class ShowAllTripsWindow(tk.Tk):
                 messagebox.showinfo("Success", "The trip has been deleted")
                 # Refresh the window
                 self.destroy()
-                ShowAllTripsWindow(self.user)
+                ShowAllTripsWindow(self)
         else:
             messagebox.showerror("Error", "Please select a trip to delete")
             self.lift()
