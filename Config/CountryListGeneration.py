@@ -8,12 +8,24 @@ def country_to_list():
             dico = {
                 "id": i+1,
                 "name": ele["cntry_name"],
-                "list_of_monuments": []
+                "description": ""
             }
             countries.append(dico)
 
+    countries.sort(key=lambda x: x["name"])  # Sort countries by name
+
+def sort_countries():
+    with open("Database/Entity/countries.json", "r") as f:
+        data = json.load(f)
+        data.sort(key=lambda x: x["name"])  # Sort countries by name
+
+        # Update the id of each country
+        for i, ele in enumerate(data):
+            ele["id"] = i+1
+
     with open("Database/Entity/countries.json", "w") as f:
-        json.dump(countries, f, indent=4)
+        json.dump(data, f, indent=4)
+
 
 if __name__ == "__main__":
-    country_to_list()
+    sort_countries()
