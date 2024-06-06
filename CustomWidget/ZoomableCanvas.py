@@ -9,16 +9,20 @@ class ZoomableCanvas(tk.Canvas):
         self.config(scrollregion=self.bbox("all"))  # Set scroll region to fit all items
 
         # Create scrollbars
-        self.v_scrollbar = tk.Scrollbar(master, orient="vertical", command=self.yview)
-        self.h_scrollbar = tk.Scrollbar(master, orient="horizontal", command=self.xview)
+        # self.v_scrollbar = tk.Scrollbar(master, orient="vertical", command=self.yview)
+        # self.h_scrollbar = tk.Scrollbar(master, orient="horizontal", command=self.xview)
 
         # Associate scrollbars with canvas
-        self.config(yscrollcommand=self.v_scrollbar.set)
-        self.config(xscrollcommand=self.h_scrollbar.set)
+        # self.config(yscrollcommand=self.v_scrollbar.set)
+        # self.config(xscrollcommand=self.h_scrollbar.set)
 
         # Pack the scrollbars
-        self.v_scrollbar.pack(side="right", fill="y")
-        self.h_scrollbar.pack(side="bottom", fill="x")
+        # self.v_scrollbar.pack(side="right", fill="y")
+        # self.h_scrollbar.pack(side="bottom", fill="x")
+
+        # Bind middle mouse button for scrolling
+        self.bind("<ButtonPress-1>", self.start_scroll)
+        self.bind("<B1-Motion>", self.scroll)
 
     def zoom(self, event):
         # Get the coordinates of the mouse pointer
@@ -42,3 +46,30 @@ class ZoomableCanvas(tk.Canvas):
 
         # Adjust scroll region after zooming
         self.config(scrollregion=self.bbox("all"))
+
+    def start_scroll(self, event):
+        self.scan_mark(event.x, event.y)
+
+    def scroll(self, event):
+        self.scan_dragto(event.x, event.y, gain=1)
+        self.limit_scroll()
+
+    def limit_scroll(self):
+        bbox = self.bbox("all")
+        if bbox:
+            x0, y0, x1, y1 = bbox
+            self.update_idletasks()  # Ensure the canvas is updated before limiting
+            current_x = self.canvasx(0)
+            current_y = self.canvasy(0)
+            max_x = x1 - self.winfo_width()
+            max_y = y1 - self.winfo_height()
+
+            if current_x < x0:
+                self.xview_moveto(x0 / self.bbox("all")[2])
+            elif current_x > max_x:
+                self.xview_moveto(max_x / self.bbox("all")[2])
+
+            if current_y < y0:
+                self.yview_moveto(y0 / self.bbox("all")[3])
+            elif current_y > max_y:
+                self.yview_moveto(max_y / self.bbox("all")[3])
