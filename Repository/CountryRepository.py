@@ -1,6 +1,14 @@
 import json
 from Model.Country import Country
-from Repository.MonumentRepository import get_list_of_monuments_by_country_id
+
+def get_list_of_countries():
+    with open("Database/Entity/countries.json", "r") as file:
+        countries = json.load(file)
+        countries_list = []
+        for country in countries:
+            countries_list.append(Country(country["id"], country["name"], country["description"]))
+            
+        return countries_list
 
 def get_country_name_by_id(country_id):
     with open("Database/Entity/countries.json", "r") as file:
@@ -29,14 +37,12 @@ def get_description_by_name(country_name):
             
     return None
 
-def create_object_by_name(country_name):
-    with open("Database/Entity/countries.json", "r") as file:
-        countries = json.load(file)
-        for country in countries:
-            if country["name"] == country_name:
-                description = country["description"]
+def get_all_countries_name():
+    country_names = []
+    for country in get_list_of_countries():
+        country_names.append(country.name)
+        
+    # Sort the list of countries
+    country_names.sort()
     
-    country_id = get_country_id_by_name(country_name)
-    monuments_list = get_list_of_monuments_by_country_id(country_id)
-    return Country(country_id, country_name, monuments_list)
-
+    return country_names
