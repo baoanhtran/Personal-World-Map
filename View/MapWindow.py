@@ -1,6 +1,6 @@
 import tkinter as tk
 import customtkinter as ctk
-from PIL import Image
+from PIL import Image, ImageTk, ImageSequence
 from tkinter import messagebox
 from Model.Map import Map
 from View.InfoCountryWindow import InfoCountryWindow
@@ -27,8 +27,12 @@ class MapWindow(tk.Tk):
         icon4 = Image.open("View/pictures/pw_icon.png")
         icon5 = Image.open("View/pictures/log_out_icon.png")
         icon6 = Image.open("View/pictures/quit_icon.png")
-        self.icon7 = tk.PhotoImage(file="View/pictures/waves_map.png")
         icon8 = Image.open("View/pictures/update_icon.png")
+
+        # Load the animated GIF using PIL
+        self.bg_image = Image.open("View/pictures/waves_map.gif")
+        self.frames = [ImageTk.PhotoImage(frame.resize((self.winfo_screenwidth(), self.winfo_screenheight()), Image.LANCZOS)) for frame in
+                   ImageSequence.Iterator(self.bg_image)]
 
         # Quit button
         quit_button = ctk.CTkButton(self, text="Quit", text_color= "#f5f6f9", fg_color= '#354f52', font=("Arial", 28, "bold"), hover_color = "#e2eafc", border_color = '#354f52',  image = ctk.CTkImage(dark_image=icon6, light_image=icon6))
@@ -46,7 +50,6 @@ class MapWindow(tk.Tk):
         # Icon on top
         self.canva = ctk.CTkCanvas(self.top_spacer, bg='#354f52', highlightthickness = 0)
         self.canva.pack(expand="YES")
-        self.canva.create_image(self.canva.winfo_reqwidth()/2, self.canva.winfo_reqheight()/2, image=icon1, anchor = "center")
 
         # Button to show all trips
         self.button1 = ctk.CTkButton(self.side_bar, text="Show all my trips", text_color="#f5f6f9", fg_color= "transparent", border_color = "#f5f6f9", hover_color = "#e2eafc", corner_radius= 32,   font=("Arial", 15, "bold") ,height=2, image = ctk.CTkImage(dark_image=icon2, light_image=icon2))
@@ -95,7 +98,12 @@ class MapWindow(tk.Tk):
         visited_countries = get_all_countries_visited(self.user.id)
         to_visit_countries = get_all_countries_to_visit(self.user.id)
         self.canevas.delete("all")
-        self.canevas.create_image(self.winfo_screenwidth()/2, self.winfo_screenheight()/2, image=self.icon7, anchor = "center")
+        self.canvas_image = self.canevas.create_image(self.winfo_screenwidth()//2, self.winfo_screenheight()//2, anchor="center", image=self.frames[0])
+
+        # Start the animation
+        self.current_frame = 0
+        self.animate()
+
         for (k, v) in self.map.coordinates_dict.items():
             if k in visited_countries:
                 color_shape = "#adb944"
@@ -114,6 +122,11 @@ class MapWindow(tk.Tk):
                 for ele in v:
                     poly = self.canevas.create_polygon(ele, fill=color_shape, outline="#354f52")
                     self.canevas.tag_bind(poly, "<Double-Button-1>", lambda event, name=k: self.show_country(name))
+
+    def animate(self):
+        self.current_frame = (self.current_frame + 1) % len(self.frames)
+        self.canevas.itemconfig(self.canvas_image, image=self.frames[self.current_frame])
+        self.after(500, self.animate) # Adjust the delay as needed for the GIF's frame rate
 
     def update(self, event):
         self.draw()
