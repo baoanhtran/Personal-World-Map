@@ -18,7 +18,7 @@ class SignUpWindow(tk.Tk):
         # Pack the canvas into the Frame.
         self.canva.pack()
 
-        # Load the .gif image file.
+        # Load the image file.
         img1 = tk.PhotoImage(file="View/pictures/bg_map.png")
         self.canva.create_image(0, 0, image=img1, anchor="nw")
 
@@ -35,52 +35,44 @@ class SignUpWindow(tk.Tk):
         self.label2 = ctk.CTkLabel(self,text = "Password", font = ("Arial", 11, 'bold'), text_color = '#354f52', fg_color= "#f5f6f9")
         self.label2.place(x = 175, y = 200) 
         
-        self.password = ctk.CTkEntry(self, font = ("Arial", 11, 'bold'), width= 150, height = 20, text_color = '#354f52')
+        self.password = ctk.CTkEntry(self, font = ("Arial", 11, 'bold'), width= 150, height = 20, text_color = '#354f52', show = "*")
         self.password.place(x = 175, y = 225)
 
         self.button1 = ctk.CTkButton(self, text = "Create a new Account", font = ("Arial", 11, 'bold'), width = 200, height = 30, fg_color= '#354f52', corner_radius = 10)
         self.button1.place(x = 150, y = 300)
         self.button1.bind('<Button-1>', self.new_account)
+        self.bind('<Return>', self.new_account)
 
         self.mainloop()
-
-        
-
 
     def new_account(self, event):
         username = self.username.get().strip()
         password = self.password.get().strip()
 
-        if username == "" or password == "":
+        is_valid, user, error_message = register_user(username, password)
+
+        if is_valid:
+            # Unbind events before destruction
+            self.button1.unbind('<Button-1>')
+            self.unbind('<Return>')
+
+            # Delay destruction to ensure event handler completes
+            self.user = user
+            self.after(100, self.open_map_window)
+        else:
             # If error message already exists, destroy it
             if hasattr(self, "label3"):
                 self.label3.destroy()
 
-            self.label3 = ctk.CTkLabel(self, text = "Please type all fields", font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
-            self.label3.place(x = 50, y = 400)
-        else:
-            isAdded, user = register_user(username, password)
-            if isAdded:
-                # Unbind events before destruction
-                self.button1.unbind('<Button-1>')
+            self.label3 = ctk.CTkLabel(self, text = error_message, font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
+            self.label3.place(x = 50, y = 350)
 
-                # Delay destruction to ensure event handler completes
-                self.user = user
-                self.after(100, self.open_map_window)
-            else:
-                # If error message already exists, destroy it
-                if hasattr(self, "label3"):
-                    self.label3.destroy()
+            # Clear the entry
+            self.username.delete(0, 'end')
+            self.password.delete(0, 'end')
 
-                self.label3 = ctk.CTkLabel(self, text = "This username is already taken", font = ("Courier", 15), width = 400, height = 30, bg_color= "red")
-                self.label3.place(x = 50, y = 350)
-
-                # Clear the entry
-                self.username.delete(0, 'end')
-                self.password.delete(0, 'end')
-
-                # Focus on the username entry
-                self.username.focus()
+            # Focus on the username entry
+            self.username.focus()
 
     def open_map_window(self):
         self.destroy()
