@@ -50,6 +50,7 @@ class MapWindow(tk.Tk):
         # Icon on top
         self.canva = ctk.CTkCanvas(self.top_spacer, bg='#354f52', highlightthickness = 0)
         self.canva.pack(expand="YES")
+        self.canva.create_image(self.canva.winfo_reqwidth()/2, self.canva.winfo_reqheight()/2, image=icon1, anchor = "center")
 
         # Button to show all trips
         self.button1 = ctk.CTkButton(self.side_bar, text="Show all my trips", text_color="#f5f6f9", fg_color= "transparent", border_color = "#f5f6f9", hover_color = "#e2eafc", corner_radius= 32,   font=("Arial", 15, "bold") ,height=2, image = ctk.CTkImage(dark_image=icon2, light_image=icon2))
