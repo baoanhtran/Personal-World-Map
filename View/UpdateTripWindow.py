@@ -28,11 +28,11 @@ class UpdateTripWindow(tk.Toplevel):
         self.canvas.create_image(0, 0, image=self.background_image, anchor="nw")
 
         # Title
-        self.title1 = tk.Label(self, text="Modify your trip", bg="#f5f6f9", fg="#354f52", font=("Impact", 25, "bold"))
+        self.title1 = ctk.CTkLabel(self, text="Modify your trip", font = ("Impact", 25), text_color='#354f52', fg_color= "#f5f6f9")
         self.canvas.create_window(250, 50, window=self.title1)
 
         # Label entry for the home country
-        self.label1 = tk.Label(self, text="Choose your departure country", bg="#f5f6f9", fg="#354f52", font=("Arial", 11, "bold"))
+        self.label1 = ctk.CTkLabel(self, text="Choose your departure country", font = ("Arial", 11, 'bold'), text_color = '#354f52', fg_color= "#f5f6f9")
         self.canvas.create_window(250, 100, window=self.label1)
 
         # Combo box for the departure country
@@ -43,7 +43,7 @@ class UpdateTripWindow(tk.Toplevel):
         self.canvas.create_window(250, 130, window=self.departure_country)
 
         # Label entry for the destination country
-        self.label2 = tk.Label(self, text="Choose the destination country", bg="#f5f6f9", fg="#354f52", font=("Arial", 11, "bold"))
+        self.label2 = ctk.CTkLabel(self, text="Choose the destination country", font = ("Arial", 11, 'bold'), text_color = '#354f52', fg_color= "#f5f6f9")
         self.canvas.create_window(250, 170, window=self.label2)
 
         # Combo box for the destination country
@@ -54,7 +54,7 @@ class UpdateTripWindow(tk.Toplevel):
         self.canvas.create_window(250, 200, window=self.destination_country)
 
         # Label entry for the departure date
-        self.label3 = tk.Label(self, text="Choose the departure date", bg="#f5f6f9", fg="#354f52", font=("Arial", 11, "bold"))
+        self.label3 = ctk.CTkLabel(self, text="Choose the departure date", font = ("Arial", 11, 'bold'), text_color = '#354f52', fg_color= "#f5f6f9")
         self.canvas.create_window(250, 240, window=self.label3)
 
         # Date picker for the departure date
@@ -64,7 +64,7 @@ class UpdateTripWindow(tk.Toplevel):
         self.canvas.create_window(250, 270, window=self.departure_date)
 
         # Label entry for the return date
-        self.label4 = tk.Label(self, text="Choose the return date", bg="#f5f6f9", fg="#354f52", font=("Arial", 11, "bold"))
+        self.label4 = ctk.CTkLabel(self, text="Choose the return date", font = ("Arial", 11, 'bold'), text_color = '#354f52', fg_color= "#f5f6f9")
         self.canvas.create_window(250, 310, window=self.label4)
 
         # Date picker for the return date
@@ -74,7 +74,7 @@ class UpdateTripWindow(tk.Toplevel):
         self.canvas.create_window(250, 340, window=self.return_date)
 
         # Button to save the trip
-        self.button1 = tk.Button(self, text="Modify your trip", font=("Arial", 11, 'bold'), bg='#354f52', fg="#f5f6f9", command=self.update_trip)
+        self.button1 = ctk.CTkButton(self, text="Modify your trip", font = ("Arial", 11, 'bold'), width = 200, height = 30, fg_color= '#354f52', corner_radius = 10, command=self.update_trip)
         self.canvas.create_window(250, 400, window=self.button1)
 
         self.mainloop()
@@ -102,6 +102,9 @@ class UpdateTripWindow(tk.Toplevel):
             messagebox.showinfo("Success", message)
             self.destroy()
 
+            # Refresh the map
+            self.master.master.draw()
+
             # Refresh the window
             from View.ShowAllTripsWindow import ShowAllTripsWindow
-            ShowAllTripsWindow(self.master)
+            ShowAllTripsWindow(self.master.master)

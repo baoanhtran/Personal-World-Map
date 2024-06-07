@@ -36,7 +36,7 @@ class LoginWindow(tk.Tk):
         self.label2 = ctk.CTkLabel(self,text = "Password", font = ("Arial", 11, 'bold'), text_color = '#354f52', fg_color= "#f5f6f9")
         self.label2.place(x = 175, y = 200) 
         
-        self.password = ctk.CTkEntry(self, font = ("Arial", 11, 'bold'), width= 150, height = 20, text_color = '#354f52')
+        self.password = ctk.CTkEntry(self, font = ("Arial", 11, 'bold'), width= 150, height = 20, text_color = '#354f52', show = "*")
         self.password.place(x = 175, y = 225)
 
         self.button1 = ctk.CTkButton(self, text = "Connect", font = ("Arial", 11, 'bold'), width = 200, height = 30, fg_color= '#354f52', corner_radius = 10)

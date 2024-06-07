@@ -1,6 +1,6 @@
 import tkinter as tk
 import customtkinter as ctk
-from PIL import Image
+from PIL import Image, ImageTk, ImageSequence
 from tkinter import messagebox
 from Model.Map import Map
 from View.InfoCountryWindow import InfoCountryWindow
@@ -8,7 +8,7 @@ from View.PlanNewTripWindow import PlanNewTripWindow
 from View.ShowAllTripsWindow import ShowAllTripsWindow
 from View.TripReminderWindow import TripReminderWindow
 from CustomWidget.ZoomableCanvas import ZoomableCanvas
-from Controller.MapController import get_incoming_trips, get_all_countries_visited
+from Controller.MapController import get_incoming_trips, get_all_countries_visited, get_all_countries_to_visit
 
 class MapWindow(tk.Tk):
     __slots__ = ["canevas", "map", "canva"]
@@ -18,7 +18,6 @@ class MapWindow(tk.Tk):
         self.user = user
         self.attributes("-fullscreen", True)
         self.title("Personal World Map")
-        self.current_info_window = False  # Initialize the current_info_window attribute
 
         # ICONS
         icon1 = tk.PhotoImage(file="View/pictures/map_icon.png")
@@ -27,6 +26,11 @@ class MapWindow(tk.Tk):
         icon4 = Image.open("View/pictures/pw_icon.png")
         icon5 = Image.open("View/pictures/log_out_icon.png")
         icon6 = Image.open("View/pictures/quit_icon.png")
+
+        # Load the animated GIF using PIL
+        self.bg_image = Image.open("View/pictures/waves_map.gif")
+        self.frames = [ImageTk.PhotoImage(frame.resize((self.winfo_screenwidth(), self.winfo_screenheight()), Image.LANCZOS)) for frame in
+                   ImageSequence.Iterator(self.bg_image)]
 
         # Quit button
         quit_button = ctk.CTkButton(self, text="Quit", text_color= "#f5f6f9", fg_color= '#354f52', font=("Arial", 28, "bold"), hover_color = "#e2eafc", border_color = '#354f52',  image = ctk.CTkImage(dark_image=icon6, light_image=icon6))
@@ -75,7 +79,7 @@ class MapWindow(tk.Tk):
         self.map = Map(self.winfo_screenwidth(), self.winfo_screenheight())
         self.draw()
         self.canevas.pack(side="left")
-
+        
         # Reminders
         self.after(500, self.show_reminders)
 
@@ -84,12 +88,26 @@ class MapWindow(tk.Tk):
     def quit(self, event):
         self.destroy()
 
+    def animate(self):
+        self.current_frame = (self.current_frame + 1) % len(self.frames)
+        self.canevas.itemconfig(self.canvas_image, image=self.frames[self.current_frame])
+        self.after(50, self.animate) # Adjust the delay as needed for the GIF's frame rate
+
     def draw(self):
         visited_countries = get_all_countries_visited(self.user.id)
+        to_visit_countries = get_all_countries_to_visit(self.user.id)
         self.canevas.delete("all")
+        self.canvas_image = self.canevas.create_image(self.winfo_screenwidth()//2, self.winfo_screenheight()//2, anchor="center", image=self.frames[0])
+
+        # Start the animation
+        self.current_frame = 0
+        self.animate()
+
         for (k, v) in self.map.coordinates_dict.items():
-            if k in visited_countries:
-                color_shape = "#eb4934"
+            if k in to_visit_countries:
+                color_shape = "#c06848"
+            elif k in visited_countries:
+                color_shape = "#adb944"
             else:
                 color_shape = "#f5f6f9"
                 
