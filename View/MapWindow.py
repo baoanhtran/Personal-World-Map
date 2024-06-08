@@ -33,9 +33,9 @@ class MapWindow(tk.Tk):
                    ImageSequence.Iterator(self.bg_image)]
 
         # Quit button
-        quit_button = ctk.CTkButton(self, text="Quit", text_color= "#f5f6f9", fg_color= '#354f52', font=("Arial", 28, "bold"), hover_color = "#e2eafc", border_color = '#354f52',  image = ctk.CTkImage(dark_image=icon6, light_image=icon6))
-        quit_button.bind("<Button-1>", self.quit)
-        quit_button.pack(side="top", fill="x")
+        self.quit_button = ctk.CTkButton(self, text="Quit", text_color= "#f5f6f9", fg_color= '#354f52', font=("Arial", 28, "bold"), hover_color = "#e2eafc", border_color = '#354f52',  image = ctk.CTkImage(dark_image=icon6, light_image=icon6))
+        self.quit_button.bind("<Button-1>", self.quit)
+        self.quit_button.pack(side="top", fill="x")
 
         # Side bar containing 3 buttons
         self.side_bar = ctk.CTkFrame(self, fg_color='#354f52', border_color = '#354f52')
@@ -78,6 +78,9 @@ class MapWindow(tk.Tk):
         self.canevas = ZoomableCanvas(self, bg="#e2eafc", width=self.winfo_screenwidth(), height=self.winfo_screenheight())
         self.map = Map(self.winfo_screenwidth(), self.winfo_screenheight())
         self.draw()
+        # Start the animation
+        self.current_frame = 0
+        self.animate()
         self.canevas.pack(side="left")
         
         # Reminders
@@ -91,17 +94,13 @@ class MapWindow(tk.Tk):
     def animate(self):
         self.current_frame = (self.current_frame + 1) % len(self.frames)
         self.canevas.itemconfig(self.canvas_image, image=self.frames[self.current_frame])
-        self.after(50, self.animate) # Adjust the delay as needed for the GIF's frame rate
+        self.after(1000, self.animate) # Adjust the delay as needed for the GIF's frame rate
 
     def draw(self):
         visited_countries = get_all_countries_visited(self.user.id)
         to_visit_countries = get_all_countries_to_visit(self.user.id)
         self.canevas.delete("all")
         self.canvas_image = self.canevas.create_image(self.winfo_screenwidth()//2, self.winfo_screenheight()//2, anchor="center", image=self.frames[0])
-
-        # Start the animation
-        self.current_frame = 0
-        self.animate()
 
         for (k, v) in self.map.coordinates_dict.items():
             if k in to_visit_countries:
@@ -143,6 +142,23 @@ class MapWindow(tk.Tk):
         if not messagebox.askokcancel("Sign out", "Are you sure you want to sign out ?"):
             return
 
+        # Unbind all events
+        self.button1.unbind("<Button-1>")
+        self.button2.unbind("<Button-1>")
+        self.button3.unbind("<Button-1>")
+        self.button4.unbind("<Button-1>")
+        self.canevas.unbind("<Button-1>")
+        self.quit_button.unbind("<Button-1>")
+
+        # Unbind all tag binds
+        for tag in self.canevas.find_all():
+            self.canevas.tag_unbind(tag, "<Double-Button-1>")
+
+        # Stop the animation
+        self.after_cancel(self.animate)
+
+        # Destroy the window
         self.destroy()
+
         from View.SigninWindow import LoginWindow
         LoginWindow()

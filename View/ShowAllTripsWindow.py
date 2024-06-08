@@ -49,22 +49,28 @@ class ShowAllTripsWindow(tk.Toplevel):
         self.past_tree = ttk.Treeview(self)
         # Choice not allowed
         self.past_tree["selectmode"] = "none"
-        self.past_tree["columns"] = ("departure", "destination", "departure_date", "return_date")
+        self.past_tree["columns"] = ("departure", "destination", "departure_date", "return_date", "transport", "duration", "carbon_footprint")
         self.past_tree.column("#0", width=0, stretch=tk.NO)
         self.past_tree.column("departure", anchor=tk.W, width=200)
         self.past_tree.column("destination", anchor=tk.W, width=200)
         self.past_tree.column("departure_date", anchor=tk.W, width=200)
         self.past_tree.column("return_date", anchor=tk.W, width=200)
+        self.past_tree.column("transport", anchor=tk.W, width=200)
+        self.past_tree.column("duration", anchor=tk.W, width=200)
+        self.past_tree.column("carbon_footprint", anchor=tk.W, width=200)
         self.past_tree.heading("#0", text="", anchor=tk.W)
         self.past_tree.heading("departure", text="Departure", anchor=tk.W)
         self.past_tree.heading("destination", text="Destination", anchor=tk.W)
         self.past_tree.heading("departure_date", text="Departure date", anchor=tk.W)
         self.past_tree.heading("return_date", text="Return date", anchor=tk.W)
+        self.past_tree.heading("transport", text="Transport", anchor=tk.W)
+        self.past_tree.heading("duration", text="Duration (in hours)", anchor=tk.W)
+        self.past_tree.heading("carbon_footprint", text="Carbon footprint (in kg)", anchor=tk.W)
 
         for trip in past_trips:
             departure = get_country_name(trip.departure_id)
             destination = get_country_name(trip.destination_id)
-            self.past_tree.insert("", tk.END, text="", values=(departure, destination, trip.departure_date.strftime("%d/%m/%Y"), trip.return_date.strftime("%d/%m/%Y")))
+            self.past_tree.insert("", tk.END, text="", values=(departure, destination, trip.departure_date.strftime("%d/%m/%Y"), trip.return_date.strftime("%d/%m/%Y"), trip.transport, str(trip.duration), str(trip.carbon_footprint)))
 
         self.past_tree.pack(side="top", fill="x")
 
@@ -78,22 +84,28 @@ class ShowAllTripsWindow(tk.Toplevel):
         self.upcoming_tree = ttk.Treeview(self)
         # Single choice
         self.upcoming_tree["selectmode"] = "browse"
-        self.upcoming_tree["columns"] = ("departure", "destination", "departure_date", "return_date")
+        self.upcoming_tree["columns"] = ("departure", "destination", "departure_date", "return_date", "transport", "duration", "carbon_footprint")
         self.upcoming_tree.column("#0", width=0, stretch=tk.NO)
         self.upcoming_tree.column("departure", anchor=tk.W, width=200)
         self.upcoming_tree.column("destination", anchor=tk.W, width=200)
         self.upcoming_tree.column("departure_date", anchor=tk.W, width=200)
         self.upcoming_tree.column("return_date", anchor=tk.W, width=200)
+        self.upcoming_tree.column("transport", anchor=tk.W, width=200)
+        self.upcoming_tree.column("duration", anchor=tk.W, width=200)
+        self.upcoming_tree.column("carbon_footprint", anchor=tk.W, width=200)
         self.upcoming_tree.heading("#0", text="", anchor=tk.W)
         self.upcoming_tree.heading("departure", text="Departure", anchor=tk.W)
         self.upcoming_tree.heading("destination", text="Destination", anchor=tk.W)
         self.upcoming_tree.heading("departure_date", text="Departure date", anchor=tk.W)
         self.upcoming_tree.heading("return_date", text="Return date", anchor=tk.W)
+        self.upcoming_tree.heading("transport", text="Transport", anchor=tk.W)
+        self.upcoming_tree.heading("duration", text="Duration (in hours)", anchor=tk.W)
+        self.upcoming_tree.heading("carbon_footprint", text="Carbon footprint (in kg)", anchor=tk.W)
 
         for trip in upcoming_trips:
             departure = get_country_name(trip.departure_id)
             destination = get_country_name(trip.destination_id)
-            self.upcoming_tree.insert("", tk.END, text="", values=(departure, destination, trip.departure_date.strftime("%d/%m/%Y"), trip.return_date.strftime("%d/%m/%Y")))
+            self.upcoming_tree.insert("", tk.END, text="", values=(departure, destination, trip.departure_date.strftime("%d/%m/%Y"), trip.return_date.strftime("%d/%m/%Y"), trip.transport, str(trip.duration), str(trip.carbon_footprint)))
             
         self.upcoming_tree.pack(side="top", fill="x")
 
@@ -101,10 +113,12 @@ class ShowAllTripsWindow(tk.Toplevel):
         # Get the values of the selected item
         selected_item = self.upcoming_tree.selection()
         if selected_item:
-            departure, destination, departure_date, return_date = self.upcoming_tree.item(selected_item)["values"]
+            departure, destination, departure_date, return_date, transport, duration, carbon_footprint = self.upcoming_tree.item(selected_item)["values"]
             departure_date = datetime.strptime(departure_date, "%d/%m/%Y")
             return_date = datetime.strptime(return_date, "%d/%m/%Y")
-            trip = Trip(self.user.id, get_country_id(departure), get_country_id(destination), departure_date, return_date)
+            duration = float(duration)
+            carbon_footprint = float(carbon_footprint)
+            trip = Trip(self.user.id, get_country_id(departure), get_country_id(destination), departure_date, return_date, transport, duration, carbon_footprint)
             self.destroy()
             UpdateTripWindow(self, trip)
         else:
@@ -115,17 +129,21 @@ class ShowAllTripsWindow(tk.Toplevel):
         # Get the values of the selected item
         selected_item = self.upcoming_tree.selection()
         if selected_item:
-            departure, destination, departure_date, return_date = self.upcoming_tree.item(selected_item)["values"]
+            departure, destination, departure_date, return_date, transport, duration, carbon_footprint = self.upcoming_tree.item(selected_item)["values"]
             if not messagebox.askokcancel("Delete trip", f"Do you really want to delete the trip from {departure} to {destination} on {departure_date} ?"):
                 return
-            
+
             # Delete the trip
-            is_deleted = delete_planned_trip(self.user.id, departure, destination, departure_date, return_date)
+            is_deleted, message = delete_planned_trip(self.user.id, departure, destination, departure_date, return_date, transport, duration, carbon_footprint)
             if is_deleted:
-                messagebox.showinfo("Success", "The trip has been deleted")
+                messagebox.showinfo("Success", message)
+
+                # Refresh the map
+                self.master.draw()
+
                 # Refresh the window
                 self.destroy()
-                ShowAllTripsWindow(self)
+                ShowAllTripsWindow(self.master)
         else:
             messagebox.showerror("Error", "Please select a trip to delete")
             self.lift()

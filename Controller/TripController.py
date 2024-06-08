@@ -2,8 +2,8 @@ from Repository.TripRepository import add_trip, modify_trip, delete_trip, get_al
 from Repository.CountryRepository import get_country_id_by_name, get_all_countries_name, get_country_name_by_id
 from datetime import datetime
 
-def add_new_trip(user_id, departure_country, destination_country, departure_date, return_date):
-    if departure_country == "" or destination_country == "" or departure_date == "" or return_date == "":
+def add_new_trip(user_id, departure_country, destination_country, departure_date, return_date, transport, duration):
+    if departure_country == "" or destination_country == "" or transport == "" or duration == "":
         return False, "Please type all fields"
     
     if departure_country == destination_country:
@@ -21,14 +21,43 @@ def add_new_trip(user_id, departure_country, destination_country, departure_date
             or (departure_date <= trip.departure_date and return_date >= trip.return_date):
 
             return False, "You already have a trip planned at this date"
+        
+    try:
+        duration = float(duration)
+    except ValueError:
+        return False, "Duration must be a number"
+    
+    if duration <= 0:
+        return False, "Duration must be positive"
     
     departure_id = get_country_id_by_name(departure_country)
     destination_id = get_country_id_by_name(destination_country)
+    duration = float(duration)
 
-    return add_trip(user_id, departure_id, destination_id, departure_date, return_date), "Trip added successfully"
+    # Calculate the carbon footprint
+    if transport == "Plane":
+        carbon_footprint = 17.825 * duration
+    elif transport == "Train":
+        carbon_footprint = 1.77 * duration
+    elif transport == "Car":
+        carbon_footprint = 9.89 * duration
+    elif transport == "Bus":
+        carbon_footprint = 1.5 * duration
+    elif transport == "Ferry":
+        carbon_footprint = 1.8 * duration
+    elif transport == "Bike":
+        carbon_footprint = 0
+    elif transport == "Foot":
+        carbon_footprint = 0
 
-def update_planned_trip(old_trip, new_departure_country, new_destination_country, new_departure_date, new_return_date):
-    if new_departure_country == "" or new_destination_country == "":
+    # Round the carbon footprint to 1 decimal places
+    carbon_footprint = round(carbon_footprint, 1)
+
+    return add_trip(user_id, departure_id, destination_id, departure_date, return_date, transport, duration, carbon_footprint), "Trip added successfully"
+
+def update_planned_trip(old_trip, new_departure_country, new_destination_country, new_departure_date, new_return_date, new_transport, new_duration):
+
+    if new_departure_country == "" or new_destination_country == "" or new_transport == "" or new_duration == "":
         return False, "Please type all fields"
     
     if new_departure_country == new_destination_country:
@@ -49,16 +78,47 @@ def update_planned_trip(old_trip, new_departure_country, new_destination_country
 
             return False, "You already have a trip planned at this date"
         
+    try:
+        new_duration = float(new_duration)
+    except ValueError:
+        return False, "Duration must be a number"
+    
+    if new_duration <= 0:
+        return False, "Duration must be positive"
+        
     departure_id = get_country_id_by_name(new_departure_country)
     destination_id = get_country_id_by_name(new_destination_country)
 
-    return modify_trip(old_trip, departure_id, destination_id, new_departure_date, new_return_date), "Trip modified successfully"
+    # Calculate the carbon footprint
+    if new_transport == "Plane":
+        carbon_footprint = 17.825 * new_duration
+    elif new_transport == "Train":
+        carbon_footprint = 1.77 * new_duration
+    elif new_transport == "Car":
+        carbon_footprint = 9.89 * new_duration
+    elif new_transport == "Bus":
+        carbon_footprint = 1.5 * new_duration
+    elif new_transport == "Ferry":
+        carbon_footprint = 1.8 * new_duration
+    elif new_transport == "Bike":
+        carbon_footprint = 0
+    elif new_transport == "Foot":
+        carbon_footprint = 0
 
-def delete_planned_trip(user_id, departure_country, destination_country, departure_date, return_date):
+    # Round the carbon footprint to 1 decimal places
+    carbon_footprint = round(carbon_footprint, 1)
+
+    return modify_trip(old_trip, departure_id, destination_id, new_departure_date, new_return_date, new_transport, new_duration, carbon_footprint), "Trip modified successfully"
+
+def delete_planned_trip(user_id, departure_country, destination_country, departure_date, return_date, transport, duration, carbon_footprint):
     departure_id = get_country_id_by_name(departure_country)
     destination_id = get_country_id_by_name(destination_country)
 
-    return delete_trip(user_id, departure_id, destination_id, departure_date, return_date)
+    # Convert duration and carbon_footprint to float
+    duration = float(duration)
+    carbon_footprint = float(carbon_footprint)
+
+    return delete_trip(user_id, departure_id, destination_id, departure_date, return_date, transport, duration, carbon_footprint), "Trip deleted successfully"
 
 def get_all_past_trips(user_id):
     all_trips = get_all_trips_by_user_id(user_id)

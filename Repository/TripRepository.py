@@ -10,12 +10,12 @@ def get_all_trips_by_user_id(user_id):
             if i["user_id"] == user_id:
                 departure_date = datetime.strptime(i["departure_date"], "%d/%m/%Y")
                 return_date = datetime.strptime(i["return_date"], "%d/%m/%Y")
-                trip = Trip(i["user_id"], i["departure_id"], i["destination_id"], departure_date, return_date)
+                trip = Trip(i["user_id"], i["departure_id"], i["destination_id"], departure_date, return_date, i["transport"], i["duration"], i["carbon_footprint"])
                 trips.append(trip)
                 
     return trips
 
-def add_trip(user_id, departure_id, destination_id, departure_date, return_date):
+def add_trip(user_id, departure_id, destination_id, departure_date, return_date, transport, duration, carbon_footprint):
     with open("Database/Entity/trips.json", "r") as file:
         trips = json.load(file)
         new_trip = {
@@ -23,7 +23,10 @@ def add_trip(user_id, departure_id, destination_id, departure_date, return_date)
             "departure_id": departure_id,
             "destination_id": destination_id,
             "departure_date": departure_date.strftime("%d/%m/%Y"),
-            "return_date": return_date.strftime("%d/%m/%Y")
+            "return_date": return_date.strftime("%d/%m/%Y"),
+            "transport": transport,
+            "duration": duration,
+            "carbon_footprint": carbon_footprint
         }
         trips.append(new_trip)
         
@@ -32,26 +35,29 @@ def add_trip(user_id, departure_id, destination_id, departure_date, return_date)
     
     return True
 
-def modify_trip(old_trip, new_departure_id, new_destination_id, new_departure_date, new_return_date):
+def modify_trip(old_trip, new_departure_id, new_destination_id, new_departure_date, new_return_date, new_transport, new_duration, new_carbon_footprint):
     with open("Database/Entity/trips.json", "r") as file:
         trips = json.load(file)
         for i in trips:
-            if i["user_id"] == old_trip.user_id and i["departure_id"] == old_trip.departure_id and i["destination_id"] == old_trip.destination_id and i["departure_date"] == old_trip.departure_date.strftime("%d/%m/%Y") and i["return_date"] == old_trip.return_date.strftime("%d/%m/%Y"):
+            if i["user_id"] == old_trip.user_id and i["departure_id"] == old_trip.departure_id and i["destination_id"] == old_trip.destination_id and i["departure_date"] == old_trip.departure_date.strftime("%d/%m/%Y") and i["return_date"] == old_trip.return_date.strftime("%d/%m/%Y") and i["transport"] == old_trip.transport and i["carbon_footprint"] == old_trip.carbon_footprint:
                 i["departure_id"] = new_departure_id
                 i["destination_id"] = new_destination_id
                 i["departure_date"] = new_departure_date.strftime("%d/%m/%Y")
                 i["return_date"] = new_return_date.strftime("%d/%m/%Y")
+                i["transport"] = new_transport
+                i["duration"] = new_duration
+                i["carbon_footprint"] = new_carbon_footprint
                 with open("Database/Entity/trips.json", "w") as file:
                     json.dump(trips, file, indent=4)
                 return True
                 
     return False
 
-def delete_trip(user_id, departure_id, destination_id, departure_date, return_date):
+def delete_trip(user_id, departure_id, destination_id, departure_date, return_date, transport, duration, carbon_footprint):
     with open("Database/Entity/trips.json", "r") as file:
         trips = json.load(file)
         for i in trips:
-            if i["user_id"] == user_id and i["departure_id"] == departure_id and i["destination_id"] == destination_id and i["departure_date"] == departure_date and i["return_date"] == return_date:
+            if i["user_id"] == user_id and i["departure_id"] == departure_id and i["destination_id"] == destination_id and i["departure_date"] == departure_date and i["return_date"] == return_date and i["transport"] == transport and i["duration"] == duration and i["carbon_footprint"] == carbon_footprint:
                 trips.remove(i)
                 with open("Database/Entity/trips.json", "w") as file:
                     json.dump(trips, file, indent=4)
