@@ -6,6 +6,23 @@ from Controller.TripController import get_country_name
 from datetime import datetime
 
 class TripReminderWindow(tk.Toplevel):
+    """
+    A window for displaying reminders of upcoming trips.
+
+    Args:
+        master: The master widget.
+        reminders: A list of reminders of upcoming trips.
+
+    Attributes:
+        master: The master widget.
+        reminders: A list of reminders of upcoming trips.
+        bg_image: The background image for the window.
+        frames: The frames of the animated GIF.
+        canvas: Canvas widget for the background image.
+        canvas_image: The image object on the canvas.
+        current_frame: The current frame of the animated GIF.
+        tree: Treeview widget for displaying the reminders.
+    """
     def __init__(self, master, reminders):
         super().__init__()
         self.master = master
@@ -33,15 +50,18 @@ class TripReminderWindow(tk.Toplevel):
         self.protocol("WM_DELETE_WINDOW", self.on_popup_close) # Handle the window close event, to avoid closing the main window
 
     def on_popup_close(self):
+        """Handle the window close event."""
         self.master.deiconify() # Show the main window
         self.destroy()
         
     def animate(self):
+        """Animate the GIF."""
         self.current_frame = (self.current_frame + 1) % len(self.frames)
         self.canvas.itemconfig(self.canvas_image, image=self.frames[self.current_frame])
         self.after(30, self.animate) # Adjust the delay as needed for the GIF's frame rate
 
     def create_table(self):
+        """Create a table to display the reminders."""
         style = ttk.Style()
         style.configure("mystyle.Treeview",
                         background="#ADD8E6",

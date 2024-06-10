@@ -1,7 +1,18 @@
 import tkinter as tk
 
 class ZoomableCanvas(tk.Canvas):
+    """
+    A subclass of tkinter Canvas with zooming and scrolling capabilities.
+    """
+
     def __init__(self, master=None, **kwargs):
+        """
+        Initializes the ZoomableCanvas.
+
+        Args:
+            master: The parent widget.
+            **kwargs: Additional keyword arguments to pass to the Canvas.
+        """
         super().__init__(master, **kwargs)
 
         self.scale_factor = 1.0
@@ -9,22 +20,28 @@ class ZoomableCanvas(tk.Canvas):
         self.config(scrollregion=self.bbox("all"))  # Set scroll region to fit all items
 
         # Create scrollbars
-        # self.v_scrollbar = tk.Scrollbar(master, orient="vertical", command=self.yview)
-        # self.h_scrollbar = tk.Scrollbar(master, orient="horizontal", command=self.xview)
+        self.v_scrollbar = tk.Scrollbar(master, orient="vertical", command=self.yview)
+        self.h_scrollbar = tk.Scrollbar(master, orient="horizontal", command=self.xview)
 
         # Associate scrollbars with canvas
-        # self.config(yscrollcommand=self.v_scrollbar.set)
-        # self.config(xscrollcommand=self.h_scrollbar.set)
+        self.config(yscrollcommand=self.v_scrollbar.set)
+        self.config(xscrollcommand=self.h_scrollbar.set)
 
         # Pack the scrollbars
-        # self.v_scrollbar.pack(side="right", fill="y")
-        # self.h_scrollbar.pack(side="bottom", fill="x")
+        self.v_scrollbar.pack(side="right", fill="y")
+        self.h_scrollbar.pack(side="bottom", fill="x")
 
         # Bind middle mouse button for scrolling
         self.bind("<ButtonPress-1>", self.start_scroll)
         self.bind("<B1-Motion>", self.scroll)
 
     def zoom(self, event):
+        """
+        Zooms in or out of the canvas depending on the direction of the mouse wheel.
+
+        Args:
+            event: The mouse wheel event.
+        """
         # Get the coordinates of the mouse pointer
         x_center = self.canvasx(event.x)
         y_center = self.canvasy(event.y)
@@ -48,13 +65,28 @@ class ZoomableCanvas(tk.Canvas):
         self.config(scrollregion=self.bbox("all"))
 
     def start_scroll(self, event):
+        """
+        Initiates scrolling by marking the starting position of the canvas.
+
+        Args:
+            event: The mouse event.
+        """
         self.scan_mark(event.x, event.y)
 
     def scroll(self, event):
+        """
+        Scrolls the canvas.
+
+        Args:
+            event: The mouse event.
+        """
         self.scan_dragto(event.x, event.y, gain=1)
         self.limit_scroll()
 
     def limit_scroll(self):
+        """
+        Limits the scrolling of the canvas to its boundaries.
+        """
         bbox = self.bbox("all")
         if bbox:
             x0, y0, x1, y1 = bbox

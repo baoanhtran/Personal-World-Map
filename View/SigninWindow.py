@@ -5,8 +5,20 @@ from View.MapWindow import MapWindow
 from View.SignUpWindow import SignUpWindow
 
 class LoginWindow(tk.Tk):
-    __slots__ = ["label1", "label2", "label3", "username", "password", "button1", "button2", "title1", "canva"]
+    """
+    A window for logging in.
 
+    Attributes:
+        canva: Canvas widget for the background image.
+        title1: Customized label for the title.
+        label1: Customized label for "Username".
+        username: Entry widget for entering the username.
+        label2: Customized label for "Password".
+        password: Entry widget for entering the password.
+        button1: Customized button for logging in.
+        button2: Customized button for creating a new account.
+        label3: Customized label for displaying error messages.
+    """
     def __init__(self):
         ctk.set_appearance_mode("light")
 
@@ -51,6 +63,7 @@ class LoginWindow(tk.Tk):
         self.mainloop()
 
     def login(self, event):
+        """Sign in the user."""
         username_val = self.username.get().strip()
         password_val = self.password.get().strip()
 
@@ -83,6 +96,7 @@ class LoginWindow(tk.Tk):
             self.username.focus()
 
     def SignUp(self, event):
+        """Sign up the user."""
         # Unbind events before destruction
         self.button1.unbind('<Button-1>')
         self.button2.unbind('<Button-1>')
@@ -92,13 +106,16 @@ class LoginWindow(tk.Tk):
         self.after(100, self.open_sign_up_window)
 
     def open_map_window(self):
+        """Open the map window."""
         self.destroy()
         MapWindow(self.user)
 
     def open_sign_up_window(self):
+        """Open the sign up window."""
         self.destroy()
         SignUpWindow()
     
     def quit(self):
+        """Close the window."""
         self.destroy()
         

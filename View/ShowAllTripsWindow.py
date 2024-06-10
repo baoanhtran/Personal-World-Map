@@ -8,6 +8,18 @@ from Model.Trip import Trip
 from datetime import datetime
 
 class ShowAllTripsWindow(tk.Toplevel):
+    """
+    A window for displaying all the trips of the user.
+
+    Args:
+        master: The master widget.
+
+    Attributes:
+        master: The master widget.
+        user: The current user object.
+        past_tree: Treeview widget for displaying past trips.
+        upcoming_tree: Treeview widget for displaying upcoming trips.
+    """
     def __init__(self, master):
         ctk.set_appearance_mode("light")
 
@@ -40,6 +52,7 @@ class ShowAllTripsWindow(tk.Toplevel):
         self.mainloop()
     
     def show_past_trips(self):
+        """Display past trips in form of treeview."""
         # Subtitle label
         subtitle = ctk.CTkLabel(self, text="Past trips", font=("Arial", 20, "bold"), text_color="#f5f6f9", bg_color="#f5f6f9", fg_color="#354f52")
         subtitle.pack(side="top", fill="x")
@@ -75,6 +88,7 @@ class ShowAllTripsWindow(tk.Toplevel):
         self.past_tree.pack(side="top", fill="x")
 
     def show_upcoming_trips(self):
+        """Display upcoming trips in form of treeview."""
         # Subtitle label
         subtitle = ctk.CTkLabel(self, text="Upcoming trips", font=("Arial", 20, "bold"), text_color="#f5f6f9", bg_color="#f5f6f9", fg_color="#354f52")
         subtitle.pack(side="top", fill="x")
@@ -110,6 +124,7 @@ class ShowAllTripsWindow(tk.Toplevel):
         self.upcoming_tree.pack(side="top", fill="x")
 
     def modify_trip(self, trip):
+        """Modify the selected trip."""
         # Get the values of the selected item
         selected_item = self.upcoming_tree.selection()
         if selected_item:
@@ -126,6 +141,7 @@ class ShowAllTripsWindow(tk.Toplevel):
             self.lift() 
 
     def delete_trip(self, event):
+        """Delete the selected trip."""
         # Get the values of the selected item
         selected_item = self.upcoming_tree.selection()
         if selected_item:

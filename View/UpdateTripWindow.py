@@ -7,6 +7,35 @@ from tkcalendar import DateEntry
 from Controller.TripController import update_planned_trip, get_all_countries_without_chosen, get_country_name
 
 class UpdateTripWindow(tk.Toplevel):
+    """
+    A window for modifying a planned trip.
+
+    Args:
+        master: The master widget.
+        trip: The trip to modify.
+
+    Attributes:
+        master: The master widget.
+        user: The current user object.
+        trip: The trip to modify.
+        list_countries: A list of countries excluding the departure country.
+        background_image: The background image for the window.
+        canvas: Canvas widget for the background image.
+        title1: Customized label for the title.
+        label1: Customized label for "Choose your departure country".
+        departure_country: Combo box for selecting the departure country.
+        label2: Customized label for "Choose the destination country".
+        destination_country: Combo box for selecting the destination country.
+        label3: Customized label for "Choose the departure date".
+        departure_date: Date picker for selecting the departure date.
+        label4: Customized label for "Choose the return date".
+        return_date: Date picker for selecting the return date.
+        label5: Customized label for "Choose the transport".
+        transport: Combo box for selecting the mode of transport.
+        label6: Customized label for "Duration (in hours)".
+        duration: Entry widget for entering the duration of the trip.
+        button1: Customized button for saving the trip.
+    """
     def __init__(self, master, trip):
         ctk.set_appearance_mode("light")
         super().__init__()
@@ -95,6 +124,7 @@ class UpdateTripWindow(tk.Toplevel):
         self.mainloop()
 
     def update_trip(self):
+        """Update the trip in the database."""
         departure_country = self.departure_country.get()
         destination_country = self.destination_country.get()
         departure_date = self.departure_date.get_date()

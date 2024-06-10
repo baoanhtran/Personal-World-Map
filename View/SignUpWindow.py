@@ -4,8 +4,19 @@ from Controller.LoginController import register_user
 from View.MapWindow import MapWindow
 
 class SignUpWindow(tk.Tk):
-    __slots__ = ["label1", "label2", "label3", "username", "password", "button1", "title1", "canva"]
+    """
+    A window for creating a new account.
 
+    Attributes:
+        canva: Canvas widget for the background image.
+        title1: Customized label for the title.
+        label1: Customized label for "Username".
+        username: Entry widget for entering the username.
+        label2: Customized label for "Password".
+        password: Entry widget for entering the password.
+        button1: Customized button for creating a new account.
+        label3: Customized label for displaying error messages.
+    """
     def __init__(self):
         super().__init__()
         self.title("Your personal travel map")
@@ -46,6 +57,7 @@ class SignUpWindow(tk.Tk):
         self.mainloop()
 
     def new_account(self, event):
+        """Sign up a new user."""
         username = self.username.get().strip()
         password = self.password.get().strip()
 
@@ -75,5 +87,6 @@ class SignUpWindow(tk.Tk):
             self.username.focus()
 
     def open_map_window(self):
+        """Open the map window."""
         self.destroy()
         MapWindow(self.user)

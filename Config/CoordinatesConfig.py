@@ -1,6 +1,10 @@
 import json
 
 def load_raw_coordinates():
+    """
+    Loads country shape data from a JSON file, extracts the coordinates for each country,
+    and saves the coordinates to a new JSON file.
+    """
     with open("Database/ExternalData/country_shapes.json", "r") as f:
         data = json.load(f)
         coordinates = {}

@@ -5,6 +5,3 @@ class Country:
         self.id = id
         self.name = name
         self.description = description
-    
-    def __eq__(self, other):
-        return self.id == other.id

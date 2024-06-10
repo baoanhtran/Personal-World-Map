@@ -38,5 +38,15 @@
         "transport": "Ferry",
         "duration": 123.0,
         "carbon_footprint": 221.4
+    },
+    {
+        "user_id": 1,
+        "departure_id": 116,
+        "destination_id": 93,
+        "departure_date": "13/06/2024",
+        "return_date": "13/06/2024",
+        "transport": "Ferry",
+        "duration": 23.0,
+        "carbon_footprint": 41.4
     }
 ]

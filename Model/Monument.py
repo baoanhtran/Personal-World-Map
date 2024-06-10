@@ -9,6 +9,3 @@ class Monument:
 
     def __str__(self):
         return f"{self.name}\n"
-        
-    def __eq__(self, other):
-        return self.id == other.id
