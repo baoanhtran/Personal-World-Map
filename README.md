@@ -20,7 +20,7 @@ This application is a travel organiser that allows users of following functional
 The easiest way to install our application is:
 
 1. Download this project to your computer
-2. Open a Python environment such as Pycharm or Spider, [click here if you don't have one](https://www.jetbrains.com/pycharm/download/?section=mac)
+2. Open a Python environment such as Pycharm or Spider, [click here if you don't have one](https://www.jetbrains.com/pycharm/download/?section=windows)
 3. Clone the downloaded folder to your python environment
 4. Ensure you have the necessary [libraries](requirements.txt) installed
 5. Run the [App.py](App.py) file
